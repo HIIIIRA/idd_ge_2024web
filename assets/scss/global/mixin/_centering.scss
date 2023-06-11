@@ -1,0 +1,9 @@
+@use "../../setting" as setting;
+@use "../../setting/color" as color;
+@use "../faundation/responsive" as responsive;
+
+@mixin origin-centering($hor: -50%, $ver: -50%) {
+    transform: translate($hor, $ver);
+    -webkit-transform: translate($hor, $ver);
+    -ms-transform: translate($hor, $ver);
+}

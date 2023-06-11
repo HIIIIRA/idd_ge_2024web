@@ -1,0 +1,19 @@
+@use "../../setting/config" as config;
+
+@mixin res($mode: "", $a: 0, $b: 0) {
+    @if $mode== "sp" {
+        @media screen and (max-width: config.$maxSpWidth) {
+            @content;
+        }
+    }
+    @if $mode== "tb" {
+        @media screen and (max-width: config.$minPcWidth) {
+            @content;
+        }
+    }
+    @if $mode== "pc" {
+        @media screen and (min-width: config.$minPcWidth + 1px) {
+            @content;
+        }
+    }
+}

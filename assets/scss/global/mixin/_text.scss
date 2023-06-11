@@ -1,0 +1,36 @@
+@use "../../setting" as setting;
+@use "../../setting/font" as font;
+@use "../../setting/color" as color;
+@use "../faundation/responsive" as responsive;
+
+@mixin vertical-text() {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+@mixin title() {
+    font-family: font.$serif;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    @include responsive.res("tb") {
+        font-size: 16px;
+    }
+    @include responsive.res("sp") {
+        font-size: 16px;
+    }
+}
+
+@mixin text($waight: b, $size: 14px, $color: setting.$black) {
+    font-family: font.$gothic;
+    font-size: $size;
+    letter-spacing: 0.05em;
+    line-height: 1.6em;
+    color: $color;
+    @if ($waight == b) {
+        font-weight: 700;
+    } @else if ($waight == m) {
+        font-weight: 500;
+    } @else if ($waight == r) {
+        font-weight: 400;
+    }
+}

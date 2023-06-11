@@ -1,0 +1,41 @@
+@use "../../setting" as setting;
+@use "../mixin/" as mixin;
+@use "../faundation/responsive" as res;
+
+.button-more-wrapper {
+    border: 1.5px solid setting.$black;
+    background-color: setting.$white;
+    @include mixin.margin-8(top);
+    margin-left: auto;
+    margin-right: auto;
+    height: 36px;
+    width: 140px;
+    @include mixin.border-radius--button();
+    transition-duration: 0.4s;
+    &:hover {
+        transform: scale(1.05);
+    }
+    .button-more {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        .text {
+            @include mixin.text(b, 12px);
+        }
+        .arrow-img-wrapper {
+            position: absolute;
+            @include mixin.origin-centering;
+            right: 0;
+            top: 40%;
+
+            .img {
+                height: 100%;
+                color: setting.$white;
+            }
+        }
+    }
+}

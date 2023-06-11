@@ -1,0 +1,154 @@
+@use "../faundation/responsive" as responsive;
+
+@mixin margin-A {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin margin-8($d: bottom) {
+    margin-#{$d}: 8px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 8px;
+    }
+}
+
+@mixin margin-16($d: bottom) {
+    margin-#{$d}: 16px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 12px;
+    }
+    @include responsive.res("sp") {
+        margin-#{$d}: 8px;
+    }
+}
+
+@mixin margin-24($d: bottom) {
+    margin-#{$d}: 24px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 18px;
+    }
+}
+
+@mixin margin-32($d: bottom) {
+    margin-#{$d}: 32px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 24px;
+    }
+    @include responsive.res("sp") {
+        margin-#{$d}: 16px;
+    }
+}
+
+@mixin margin-40($d: bottom) {
+    margin-#{$d}: 40px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 30px;
+    }
+}
+
+@mixin margin-64($d: bottom) {
+    margin-#{$d}: 64px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 48px;
+    }
+    @include responsive.res("sp") {
+        margin-#{$d}: 40px;
+    }
+}
+
+@mixin margin-80($d: bottom) {
+    margin-#{$d}: 80px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 60px;
+    }
+}
+
+@mixin margin-120($d: bottom) {
+    margin-#{$d}: 120px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 80px;
+    }
+}
+
+@mixin margin-n($d: bottom, $pc: 120, $sp: 60) {
+    margin-#{$d}: #{$pc}px;
+    @include responsive.res("tb") {
+        margin-#{$d}: #{$sp}px;
+    }
+}
+
+@mixin padding-8($d: bottom) {
+    padding-#{$d}: 8px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 8px;
+    }
+}
+
+@mixin padding-16($d: bottom) {
+    padding-#{$d}: 16px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 12px;
+    }
+    @include responsive.res("sp") {
+        padding-#{$d}: 8px;
+    }
+}
+
+@mixin padding-24($d: bottom) {
+    padding-#{$d}: 24px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 18px;
+    }
+}
+
+@mixin padding-32($d: bottom) {
+    padding-#{$d}: 32px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 24px;
+    }
+    @include responsive.res("sp") {
+        padding-#{$d}: 16px;
+    }
+}
+
+@mixin padding-40($d: bottom) {
+    padding-#{$d}: 40px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 30px;
+    }
+}
+
+@mixin padding-64($d: bottom) {
+    padding-#{$d}: 64px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 48px;
+    }
+}
+
+@mixin padding-80($d: bottom) {
+    padding-#{$d}: 80px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 60px;
+    }
+}
+
+@mixin padding-120($d: bottom) {
+    padding-#{$d}: 120px;
+    @include responsive.res("tb") {
+        padding-#{$d}: 80px;
+    }
+}
+
+@mixin padding-n($d: bottom, $pc: 120, $sp: 60) {
+    padding-#{$d}: #{$pc}px;
+    @include responsive.res("tb") {
+        padding-#{$d}: #{$sp}px;
+    }
+}
+
+@mixin border-radius($d: bottom) {
+    margin-#{$d}: 16px;
+    @include responsive.res("tb") {
+        margin-#{$d}: 12px;
+    }
+}

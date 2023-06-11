@@ -1,0 +1,129 @@
+$browsers: -moz-,
+    -webkit-,
+    -ms-,
+    o-,
+    "";
+
+//clearfix
+@mixin clr() {
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+
+    /* For modern browsers */
+    &:after {
+        clear: both;
+    }
+
+    zoom:1;
+    /* For IE 6/7 (trigger hasLayout) */
+}
+
+//box-sizing
+@mixin bsz($type: border-box) {
+    -webkit-box-sizing: $type;
+    -moz-box-sizing: $type;
+    box-sizing: $type;
+}
+
+//opacity
+@mixin op($opacity) {
+    opacity: $opacity;
+    filter: alpha(opacity=($opacity * 100));
+}
+
+//border-radius
+@mixin br($radius: 1em) {
+    @each $browser in $browsers {
+        #{$browser}border-radius: $radius;
+    }
+}
+
+//box-shadow
+@mixin bs($h: 10px, $v: 10px, $b: 0px, $s: 0px, $c: $black) {
+    @each $browser in $browsers {
+        #{$browser}box-shadow: $h $v $b $s $c;
+    }
+}
+
+//要素の座標 X
+@mixin xPos($x) {
+    @each $browser in $browsers {
+        #{$browser}transform: translateX($x);
+    }
+}
+
+//要素の座標 Y
+@mixin yPos($y) {
+    @each $browser in $browsers {
+        #{$browser}transform: translateY($y);
+    }
+}
+
+//天地の中央に配置
+@mixin va {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+//flex
+@mixin flex() {
+    @each $browser in $browsers {
+        display: #{$browser}flex;
+        #{$browser}flex-direction: $d;
+        #{$browser}flex-wrap: $w;
+        #{$browser}justify-content: $jc;
+        #{$browser}align-items: $ai;
+    }
+}
+
+//transition
+@mixin trs($time: 0.2s) {
+    @each $browser in $browsers {
+        #{$browser}transition: $time ease-in-out;
+    }
+}
+
+//gradient
+@mixin grd($start-color, $end-color, $orientation) {
+    background: $start-color;
+
+    @if $orientation==vertical {
+        // vertical
+        background: -moz-linear-gradient(top, $start-color 0%, $end-color 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $start-color), color-stop(100%, $end-color));
+        background: -webkit-linear-gradient(top, $start-color 0%, $end-color 100%);
+        background: -o-linear-gradient(top, $start-color 0%, $end-color 100%);
+        background: -ms-linear-gradient(top, $start-color 0%, $end-color 100%);
+        background: linear-gradient(to bottom, $start-color 0%, $end-color 100%);
+        // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='$start-color', endColorstr='$end-color', GradientType=0);
+    }
+
+    @else if $orientation==horizontal {
+        // horizontal
+        background: -moz-linear-gradient(left, $start-color 0%, $end-color 100%);
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%, $start-color), color-stop(100%, $end-color));
+        background: -webkit-linear-gradient(left, $start-color 0%, $end-color 100%);
+        background: -o-linear-gradient(left, $start-color 0%, $end-color 100%);
+        background: -ms-linear-gradient(left, $start-color 0%, $end-color 100%);
+        background: linear-gradient(to right, $start-color 0%, $end-color 100%);
+        // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='$start-color', endColorstr='$end-color', GradientType=1);
+    }
+
+    @else {
+        // radial
+        background: -moz-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
+        background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $start-color), color-stop(100%, $end-color));
+        background: -webkit-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
+        background: -o-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
+        background: -ms-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
+        background: radial-gradient(ellipse at center, $start-color 0%, $end-color 100%);
+        // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='$start-color', endColorstr='$end-color', GradientType=1);
+    }
+}

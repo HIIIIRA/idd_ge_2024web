@@ -1,0 +1,23 @@
+@mixin border-radius--smoll {
+    border-radius: 3px;
+}
+
+@mixin border-radius--medium {
+    border-radius: 5px;
+}
+
+@mixin border-radius--8px {
+    border-radius: 8px;
+}
+
+@mixin border-radius--large {
+    border-radius: 20px;
+}
+
+@mixin border-radius--circle {
+    border-radius: 50%;
+}
+
+@mixin border-radius--button {
+    border-radius: 1000px;
+}
