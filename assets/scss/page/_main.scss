@@ -2,179 +2,283 @@
 @use "../global/mixin/" as mixin;
 @use "../global/faundation/responsive" as res;
 
-body {
-    background-color: #efefef;
-    margin: 0;
+
+$border: 520px; 
+
+@mixin sp {
+  @media screen and (max-width: ($border)) {
+    @content;
+  }
+}
+
+body{
+  background-color: #efefef;
+  margin: auto;
 }
 
 /*全体包括*/
-#wrapper {
-    height: 100vh;
-    display: flex;
-    top: 0;
+#wrapper{
+  width: 100vw;
+  display: flex;
+  top: 0;
+  overflow: hidden;
+
+  @include sp {
+    flex-direction: column;
+  };
 }
 
-/*全体画像*/
-img {
-    position: relative;
-    top: 0;
-    bottom: 0;
+.pc{
+  @include sp {
+    display: none;
+  };
 }
+
+.sp{
+  display:none;
+
+  @include sp {
+    display: block;
+  };
+}
+
 
 /*---コンテナ---*/
-#container_info {
-    width: 35vw;
-    left: 0;
+#container_info{
+  width: 35vw;
+  left: 0;
+
+  @include sp {
+    width: 100vw;
+  };
 }
 
-#container_title {
-    width: 65vw;
-    height: 56.25vw;
-    position: absolute;
-    right: 0;
-}
+#container_title{
+  width: 65vw;
+  height: 78.3vw;
+  position: absolute;
+  right: 0;
 
-#container_sns {
-    position: fixed;
-    width: 188px;
-    height: 116px;
+  @include sp {
+    width: 100vw;
+    height: 120.4vw;
+    position: relative;
     top: 0;
-    right: 10;
+    order: -1;
+  };
+}
+
+#container_sns{
+  position: fixed;
+  width: 188PX;
+  height: 116PX;
+  top: 0;
+  right: 0;
+
+  @include sp {
+    width: 82PX;
+    height: 150PX;
+  };
 }
 /*--------------*/
 
+
+
 /*---画面左---*/
-#info_top {
-    width: 22vw;
-    margin: 2.2vw;
+#info_top{
+  width: 22vw;
+  margin: 2.2vw;
+
+  @include sp {
+    width: 40.8vw;
+    margin: 0 4.3vw 0 auto;
+  };
 }
 
-#info_bottom {
-    position: fixed;
-    width: 19vw;
-    height: 22.3vw;
-    margin-bottom: 2.2vw;
-    margin-left: 2.2vw;
-    bottom: 0;
-    left: 0;
+#info_bottom{
+  position: fixed;
+  width: 19vw;
+  height: 22.3vw;
+  margin-bottom: 2.2vw;
+  margin-left: 2.2vw;
+  bottom: 0;
+  left: 0;
+
+  @include sp {
+    width: 50vw;
+    height: 54.4vw;
+    margin-bottom: 4.8vw;
+    margin-left: 4.3vw;
+  };
 }
 
-#info_bottom_hanko {
-    bottom: 0;
-    left: 0;
-    display: flex;
-    position: absolute;
+#info_bottom_hanko{
+  bottom: 0;
+  left: 0;
+  display: flex;
+  position: absolute;
 }
 /*------------*/
 
+
+
 /*---画面左　画像---*/
-#img_PCidd {
-    margin-top: 1.2vw;
+.img_idd{
+  margin-top: 1.2vw;
+
+  @include sp {
+    margin-top: 2vw;
+  };
 }
 
-#img_PCdate {
-    margin-top: 2.8vw;
+.img_date{
+  margin-top: 2.8vw;
+
+  @include sp {
+    margin: 6.4vw 0 auto auto;
+    width: 30vw;
+  };
 }
 
-#img_venue {
-    width: 15.7vw;
-    margin-top: 1vw;
+#img_venue{
+  width: 15.7vw;
+  margin-top: 1vw;
+
+  @include sp {
+    display: block;
+    width: 30vw;
+    margin: 2vw 0 30vw auto;
+  };
 }
 
-#img_FromTo {
-    position: absolute;
-    width: 12.8vw;
-    margin-top: auto;
-    margin-bottom: 4.3vw;
+#img_FromTo{
+  position: absolute;
+  width: 12.8vw;
+  margin-top: auto;
+  margin-bottom: 4.3vw;
+  bottom: 0;
+
+  @include sp {
+    width: 37.3vw;
+    margin-bottom: 9.8vw;
+  };
 }
 
-#info_bottom_hanko img {
+#info_bottom_hanko{
+  img{
     height: 5vw;
     bottom: 0;
-}
 
-#img_hanko2 {
+    @include sp {
+      height: 10.6vw;
+    };
+  }
+
+  #img_hanko2{
     margin-left: 1.1vw;
+  }
 }
 /*--------------*/
 
+
+
 /*---SNSアイコン---*/
-#sns_icon {
-    display: flex;
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#sns_icon{
+  display: flex;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @include sp {
+    flex-direction: column;
+  };
+
+  #twitter{
+    background-color: black;
+  }
+  
+  #instagram{
+    background-color: white;
+    margin-left: 20px;
+
+    @include sp {
+      margin-top: 16px;
+      margin-left: 0;
+    };
+  }
 }
 
-.sns_round {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-}
+.sns_round{
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
 
-.sns_round img {
+  img{
+    position: relative;
     width: 29px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
 }
 
-#twitter {
-    background-color: black;
-}
 
-#instagram {
-    background-color: white;
-    margin-left: 20px;
-}
 /*--------------*/
 
+
+
 /*---画面右---*/
-#title_frame {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
+#title_frame{
+  position: relative;
+  width: 100%;
+  height: 100%;
 
-#img_F {
-    width: 43vw;
+  @include sp {
+    width: 104%;
+    height: 104%;
+    margin: -2%;
+  };
+
+  img{
     position: absolute;
+  }
+
+  #img_F{
+    width: 66%;
     top: 0;
     left: 0;
-}
-
-#img_r {
-    width: 33vw;
-    position: absolute;
+  }
+  
+  #img_r{
+    width: 50.6%;
     top: 0;
     right: 0;
-}
-
-#img_o {
-    width: 30.3vw;
-    position: absolute;
-    top: 28.7vw;
+  }
+  
+  #img_o{
+    width: 46.5%;
+    top: 36.6%;
     left: 0;
-}
-
-#img_m {
-    width: 31.1vw;
-    position: absolute;
-    top: auto;
-    top: 30vw;
+  }
+  
+  #img_m{
+    width: 47.8%;
+    top: 38.3%;
     right: 0;
+  }
+  
+  #img_T{
+    width: 23.3%;
+    top: 28.7%;
+    left: 0;
+  }
 }
 
-#img_T {
-    width: 15vw;
-    position: absolute;
-    top: 22.5vw;
-    left: 0;
-}
+
 /*------------*/
 
-// @media screen and (max-width: 390px) {
-// }
+
+
