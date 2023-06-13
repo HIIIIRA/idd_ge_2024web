@@ -519,8 +519,13 @@ body {
 
 /*------------*/
 /*---画面左　画像---*/
+#img_title {
+  animation: infoAnimKeyframes 1s ease-in 0s both;
+}
+
 .img_idd {
   margin-top: 1.2vw;
+  animation: infoAnimKeyframes 1s ease-in 0.3s both;
 }
 @media screen and (max-width: 520px) {
   .img_idd {
@@ -530,6 +535,7 @@ body {
 
 .img_date {
   margin-top: 2.8vw;
+  animation: infoAnimKeyframes 1s ease-in 0.6s both;
 }
 @media screen and (max-width: 520px) {
   .img_date {
@@ -541,6 +547,7 @@ body {
 #img_venue {
   width: 15.7vw;
   margin-top: 1vw;
+  animation: infoAnimKeyframes 1s ease-in 0.9s both;
 }
 @media screen and (max-width: 520px) {
   #img_venue {
@@ -556,6 +563,7 @@ body {
   margin-top: auto;
   margin-bottom: 4.3vw;
   bottom: 0;
+  animation: infoAnimKeyframes 1s ease-in 1.5s both;
 }
 @media screen and (max-width: 520px) {
   #img_FromTo {
@@ -564,6 +572,9 @@ body {
   }
 }
 
+#info_bottom_hanko {
+  animation: infoAnimKeyframes 1s ease-in 1.5s both;
+}
 #info_bottom_hanko img {
   height: 5vw;
   bottom: 0;
@@ -577,6 +588,16 @@ body {
   margin-left: 1.1vw;
 }
 
+@keyframes infoAnimKeyframes {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
 /*--------------*/
 /*---SNSアイコン---*/
 #sns_icon {
@@ -639,6 +660,9 @@ body {
 #title_frame img {
   position: absolute;
 }
+#title_frame svg {
+  position: absolute;
+}
 #title_frame #img_F {
   width: 66%;
   top: 0;
@@ -665,4 +689,26 @@ body {
   left: 0;
 }
 
-/*------------*//*# sourceMappingURL=style.css.map */
+/*------------*/
+svg text {
+  font-size: 10px;
+}
+svg .typewriter {
+  display: none;
+}
+svg .typewriter tspan {
+  display: none;
+}
+svg .typewriter::after {
+  content: "|";
+  animation: typinganime 0.8s ease infinite;
+}
+
+@keyframes typinganime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}/*# sourceMappingURL=style.css.map */

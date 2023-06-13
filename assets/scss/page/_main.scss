@@ -2,18 +2,9 @@
 @use "../global/mixin/" as mixin;
 @use "../global/faundation/responsive" as res;
 
-
-$border: 520px; 
-
-@mixin sp {
-  @media screen and (max-width: ($border)) {
-    @content;
-  }
-}
-
 body{
   background-color: #efefef;
-  margin: auto;
+  margin: auto; 
 }
 
 /*全体包括*/
@@ -23,13 +14,13 @@ body{
   top: 0;
   overflow: hidden;
 
-  @include sp {
+  @include res.res(sp) {
     flex-direction: column;
   };
 }
 
 .pc{
-  @include sp {
+  @include res.res(sp) {
     display: none;
   };
 }
@@ -37,7 +28,7 @@ body{
 .sp{
   display:none;
 
-  @include sp {
+  @include res.res(sp) {
     display: block;
   };
 }
@@ -48,7 +39,7 @@ body{
   width: 35vw;
   left: 0;
 
-  @include sp {
+  @include res.res(sp) {
     width: 100vw;
   };
 }
@@ -59,7 +50,7 @@ body{
   position: absolute;
   right: 0;
 
-  @include sp {
+  @include res.res(sp) {
     width: 100vw;
     height: 120.4vw;
     position: relative;
@@ -75,7 +66,7 @@ body{
   top: 0;
   right: 0;
 
-  @include sp {
+  @include res.res(sp) {
     width: 82PX;
     height: 150PX;
   };
@@ -88,8 +79,9 @@ body{
 #info_top{
   width: 22vw;
   margin: 2.2vw;
+  
 
-  @include sp {
+  @include res.res(sp) {
     width: 40.8vw;
     margin: 0 4.3vw 0 auto;
   };
@@ -104,7 +96,7 @@ body{
   bottom: 0;
   left: 0;
 
-  @include sp {
+  @include res.res(sp) {
     width: 50vw;
     height: 54.4vw;
     margin-bottom: 4.8vw;
@@ -118,15 +110,28 @@ body{
   display: flex;
   position: absolute;
 }
+
 /*------------*/
 
 
 
 /*---画面左　画像---*/
+$delay : 0.3;
+
+@mixin infoAnim($a) {
+  $a : $a * $delay;
+  animation: infoAnimKeyframes 1s ease-in $a + s  both;
+}
+
+#img_title{
+  @include infoAnim(0);
+}
 .img_idd{
   margin-top: 1.2vw;
 
-  @include sp {
+  @include infoAnim(1);
+
+  @include res.res(sp) {
     margin-top: 2vw;
   };
 }
@@ -134,7 +139,9 @@ body{
 .img_date{
   margin-top: 2.8vw;
 
-  @include sp {
+  @include infoAnim(2);
+
+  @include res.res(sp) {
     margin: 6.4vw 0 auto auto;
     width: 30vw;
   };
@@ -143,8 +150,10 @@ body{
 #img_venue{
   width: 15.7vw;
   margin-top: 1vw;
+  
+  @include infoAnim(3);
 
-  @include sp {
+  @include res.res(sp) {
     display: block;
     width: 30vw;
     margin: 2vw 0 30vw auto;
@@ -157,19 +166,24 @@ body{
   margin-top: auto;
   margin-bottom: 4.3vw;
   bottom: 0;
+  
+  @include infoAnim(5);
 
-  @include sp {
+  @include res.res(sp) {
     width: 37.3vw;
     margin-bottom: 9.8vw;
   };
 }
 
 #info_bottom_hanko{
+
+  @include infoAnim(5);
+
   img{
     height: 5vw;
     bottom: 0;
 
-    @include sp {
+    @include res.res(sp) {
       height: 10.6vw;
     };
   }
@@ -177,6 +191,20 @@ body{
   #img_hanko2{
     margin-left: 1.1vw;
   }
+}
+
+
+@keyframes infoAnimKeyframes{
+  0%{
+    opacity:0;
+    filter: blur(6px);
+  }
+  
+  100%{
+    opacity:1;
+    filter: blur(0px);
+  }
+
 }
 /*--------------*/
 
@@ -192,7 +220,7 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 
-  @include sp {
+  @include res.res(sp) {
     flex-direction: column;
   };
 
@@ -204,7 +232,7 @@ body{
     background-color: white;
     margin-left: 20px;
 
-    @include sp {
+    @include res.res(sp) {
       margin-top: 16px;
       margin-left: 0;
     };
@@ -236,13 +264,17 @@ body{
   width: 100%;
   height: 100%;
 
-  @include sp {
+  @include res.res(sp) {
     width: 104%;
     height: 104%;
     margin: -2%;
   };
 
   img{
+    position: absolute;
+  }
+
+  svg{
     position: absolute;
   }
 
@@ -280,5 +312,27 @@ body{
 
 /*------------*/
 
+svg{
+  text{
+    font-size: 10px;
+  }
+
+  .typewriter{
+    display: none;
+    tspan{
+      display: none;
+    }
+    
+    &::after {
+      content: "|";
+      animation: typinganime .8s ease infinite;
+    }
+
+  }
+}
 
 
+@keyframes typinganime{
+  from{opacity:0}
+  to{opacity:1}
+}
