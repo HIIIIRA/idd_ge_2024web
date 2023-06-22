@@ -2,6 +2,11 @@
 @use "../global/mixin/" as mixin;
 @use "../global/faundation/responsive" as res;
 
+@font-face {
+  font-family: 'font';
+  src: url('../font/IBMPlexMono-Regular.woff2') format('woff2');
+}
+
 body{
   background-color: #efefef;
   margin: auto; 
@@ -120,7 +125,7 @@ $delay : 0.3;
 
 @mixin infoAnim($a) {
   $a : $a * $delay;
-  animation: infoAnimKeyframes 1s ease-in $a + s  both;
+  //animation: infoAnimKeyframes 1s ease-in $a + 5s  both;
 }
 
 #img_title{
@@ -279,15 +284,27 @@ $delay : 0.3;
   }
 
   #img_F{
-    width: 66%;
+    position: absolute;
+    //width: 66%;
     top: 0;
     left: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    line-height: 8px;
+    transform-origin: top left;
+    //transform: scale(62%,45%);
   }
   
   #img_r{
+    position: absolute;
     width: 50.6%;
     top: 0;
     right: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    line-height: 8px;
+    transform-origin: top left;
+    transform: scale(40%,34%);
   }
   
   #img_o{
@@ -315,24 +332,34 @@ $delay : 0.3;
 svg{
   text{
     font-size: 10px;
-  }
+    font-family:'font';
 
-  .typewriter{
-    display: none;
-    tspan{
+    .typewriter{
       display: none;
+  
+      tspan{
+        //display: none;
+      }
+      
+      &::after {
+        content: "|";
+        animation: typinganime .8s ease infinite;
+      }
+  
     }
-    
-    &::after {
-      content: "|";
-      animation: typinganime .8s ease infinite;
-    }
-
   }
+
+  
 }
 
 
 @keyframes typinganime{
-  from{opacity:0}
-  to{opacity:1}
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
 }
+
+

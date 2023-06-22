@@ -5,10 +5,12 @@
     <title>多摩美術大学情報デザインコース卒業研究制作展2024</title>
     <meta name="description" content="多摩美術大学情報デザインコース卒業研究制作展2024">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Zen+Old+Mincho:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/anim.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -33,15 +35,18 @@
       </div>
       <div id="container_title">
         <div id="title_frame">
+        <img id="img_o" src="./assets/img/title_o.svg">
+        <img id="img_m" src="./assets/img/title_m.svg">
+        <img id="img_T" src="./assets/img/title_T.svg">
+        <!--
           <svg id="img_F" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640.3 381.14">
           <defs><style>.cls-1{fill:none;stroke:none;stroke-miterlimit:10;}</style></defs>
           <path id="Path" class="cls-1" d="m.56,11.17h607.75M.56,25.95h592.97M.56,40.73h578.19M.56,55.51h188.23M.56,70.29h188.23M.56,85.08h188.23M.56,99.86h188.23M.56,114.64h188.23M.56,129.42h188.23M.56,144.2h188.23M3.58,158.98h185.21m-170.42,14.79h170.42m-155.64,14.78h397.77m-382.99,14.78h368.21m-353.43,14.78h338.65m-323.87,14.78h309.09m-294.3,14.79h279.52m-264.74,14.78h249.96m-235.18,14.78h220.4m-205.62,14.78h52.17m-37.39,14.78h37.39m-22.6,14.79h22.6m-7.82,14.78h7.82"/>
             <text>
               <textpath xlink:href="#Path" class="typewriter">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
-                Donec posuere sem nec arcu tristique tincidunt. Praesent dictum justo sit amet quam porttitor placerat. Sed consequat at arcu id sagittis. Proin nibh nibh, pellentesque nec arcu nec, ullamcorper ornare nunc. Maecenas consequat sollicitudin dolor, id feugiat lacus accumsan eget. Praesent consectetur turpis in augue finibus, ut ultrices nibh dapibus. Morbi odio sapien, iaculis congue auctor ac, congue sit amet erat. Morbi viverra felis ex, in dictum massa eleifend non. Fusce nec luctus erat. In semper nec turpis quis convallis. Curabitur ut viverra augue. Aliquam erat volutpat. Nullam tincidunt laoreet urna, vitae rutrum purus. Nunc consectetur egestas mi at luctus. Morbi ultricies scelerisque erat non dictum. Sed tempus, orci non semper varius, tellus metus dapibus purus, sit amet placerat justo purus ut lacus.
-                Donec pretium sagittis ex, non auctor odio ornare ac. Donec sit amet condimentum lacus. Nam id blandit nisl, in venenatis orci. Nulla facilisis est ac dui malesuada, non placerat mauris sollicitudin. Praesent consectetur odio velit, eget porttitor est tempus eget. Suspendisse at ultrices neque. Sed non dictum sapien. Maecenas eu diam eleifend, aliquam eros a, congue nunc. Pellentesque sed congue libero. Etiam dictum mauris vitae erat pharetra, at sodales ligula tristique. Cras malesuada scelerisque ipsum sit amet molestie. Nunc ut orci venenatis, convallis magna porttitor, suscipit tellus. Curabitur tincidunt, diam eu volutpat ornare, enim eros varius quam, ac lobortis mi nibh sit amet orci.
-              </textpath>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
+                </textpath>
             </text>
           </svg>
           <svg id="img_r" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 474.64 631.74">
@@ -50,9 +55,10 @@
             <text>
               <textpath xlink:href="#Path_r" class="typewriter">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
-                Donec posuere sem nec arcu tristique tincidunt. Praesent dictum justo sit amet quam porttitor placerat. Sed consequat at arcu id sagittis. Proin nibh nibh, pellentesque nec arcu nec, ullamcorper ornare nunc. Maecenas consequat sollicitudin dolor, id feugiat lacus accumsan eget. Praesent consectetur turpis in augue finibus, ut ultrices nibh dapibus. Morbi odio sapien, iaculis congue auctor ac, congue sit amet erat. Morbi viverra felis ex, in dictum massa eleifend non. Fusce nec luctus erat. In semper nec turpis quis convallis. Curabitur ut viverra augue. Aliquam erat volutpat. Nullam tincidunt laoreet urna, vitae rutrum purus. Nunc consectetur egestas mi at luctus. Morbi ultricies scelerisque erat non dictum. Sed tempus, orci non semper varius, tellus metus dapibus purus, sit amet placerat justo purus ut lacus.
-                Donec pretium sagittis ex, non auctor odio ornare ac. Donec sit amet condimentum lacus. Nam id blandit nisl, in venenatis orci. Nulla facilisis est ac dui malesuada, non placerat mauris sollicitudin. Praesent consectetur odio velit, eget porttitor est tempus eget. Suspendisse at ultrices neque. Sed non dictum sapien. Maecenas eu diam eleifend, aliquam eros a, congue nunc. Pellentesque sed congue libero. Etiam dictum mauris vitae erat pharetra, at sodales ligula tristique. Cras malesuada scelerisque ipsum sit amet molestie. Nunc ut orci venenatis, convallis magna porttitor, suscipit tellus. Curabitur tincidunt, diam eu volutpat ornare, enim eros varius quam, ac lobortis mi nibh sit amet orci.
-              </textpath>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
+                
+                </textpath>
             </text>
           </svg>
           <svg id="img_o" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 436 428">
@@ -61,9 +67,9 @@
           <text>
               <textpath xlink:href="#Path_o" class="typewriter">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
-                Donec posuere sem nec arcu tristique tincidunt. Praesent dictum justo sit amet quam porttitor placerat. Sed consequat at arcu id sagittis. Proin nibh nibh, pellentesque nec arcu nec, ullamcorper ornare nunc. Maecenas consequat sollicitudin dolor, id feugiat lacus accumsan eget. Praesent consectetur turpis in augue finibus, ut ultrices nibh dapibus. Morbi odio sapien, iaculis congue auctor ac, congue sit amet erat. Morbi viverra felis ex, in dictum massa eleifend non. Fusce nec luctus erat. In semper nec turpis quis convallis. Curabitur ut viverra augue. Aliquam erat volutpat. Nullam tincidunt laoreet urna, vitae rutrum purus. Nunc consectetur egestas mi at luctus. Morbi ultricies scelerisque erat non dictum. Sed tempus, orci non semper varius, tellus metus dapibus purus, sit amet placerat justo purus ut lacus.
-                Donec pretium sagittis ex, non auctor odio ornare ac. Donec sit amet condimentum lacus. Nam id blandit nisl, in venenatis orci. Nulla facilisis est ac dui malesuada, non placerat mauris sollicitudin. Praesent consectetur odio velit, eget porttitor est tempus eget. Suspendisse at ultrices neque. Sed non dictum sapien. Maecenas eu diam eleifend, aliquam eros a, congue nunc. Pellentesque sed congue libero. Etiam dictum mauris vitae erat pharetra, at sodales ligula tristique. Cras malesuada scelerisque ipsum sit amet molestie. Nunc ut orci venenatis, convallis magna porttitor, suscipit tellus. Curabitur tincidunt, diam eu volutpat ornare, enim eros varius quam, ac lobortis mi nibh sit amet orci.
-              </textpath>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
+                
+                 </textpath>
             </text>
           </svg>
           <svg id="img_m" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 449 647">
@@ -72,9 +78,9 @@
             <text>
               <textpath xlink:href="#Path_m" class="typewriter">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
-                Donec posuere sem nec arcu tristique tincidunt. Praesent dictum justo sit amet quam porttitor placerat. Sed consequat at arcu id sagittis. Proin nibh nibh, pellentesque nec arcu nec, ullamcorper ornare nunc. Maecenas consequat sollicitudin dolor, id feugiat lacus accumsan eget. Praesent consectetur turpis in augue finibus, ut ultrices nibh dapibus. Morbi odio sapien, iaculis congue auctor ac, congue sit amet erat. Morbi viverra felis ex, in dictum massa eleifend non. Fusce nec luctus erat. In semper nec turpis quis convallis. Curabitur ut viverra augue. Aliquam erat volutpat. Nullam tincidunt laoreet urna, vitae rutrum purus. Nunc consectetur egestas mi at luctus. Morbi ultricies scelerisque erat non dictum. Sed tempus, orci non semper varius, tellus metus dapibus purus, sit amet placerat justo purus ut lacus.
-                Donec pretium sagittis ex, non auctor odio ornare ac. Donec sit amet condimentum lacus. Nam id blandit nisl, in venenatis orci. Nulla facilisis est ac dui malesuada, non placerat mauris sollicitudin. Praesent consectetur odio velit, eget porttitor est tempus eget. Suspendisse at ultrices neque. Sed non dictum sapien. Maecenas eu diam eleifend, aliquam eros a, congue nunc. Pellentesque sed congue libero. Etiam dictum mauris vitae erat pharetra, at sodales ligula tristique. Cras malesuada scelerisque ipsum sit amet molestie. Nunc ut orci venenatis, convallis magna porttitor, suscipit tellus. Curabitur tincidunt, diam eu volutpat ornare, enim eros varius quam, ac lobortis mi nibh sit amet orci.
-              </textpath>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
+                 </textpath>
             </text>
           </svg>
           <svg id="img_T" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 296">
@@ -83,13 +89,20 @@
             <text>
               <textpath xlink:href="#Path_T" class="typewriter">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
-                Donec posuere sem nec arcu tristique tincidunt. Praesent dictum justo sit amet quam porttitor placerat. Sed consequat at arcu id sagittis. Proin nibh nibh, pellentesque nec arcu nec, ullamcorper ornare nunc. Maecenas consequat sollicitudin dolor, id feugiat lacus accumsan eget. Praesent consectetur turpis in augue finibus, ut ultrices nibh dapibus. Morbi odio sapien, iaculis congue auctor ac, congue sit amet erat. Morbi viverra felis ex, in dictum massa eleifend non. Fusce nec luctus erat. In semper nec turpis quis convallis. Curabitur ut viverra augue. Aliquam erat volutpat. Nullam tincidunt laoreet urna, vitae rutrum purus. Nunc consectetur egestas mi at luctus. Morbi ultricies scelerisque erat non dictum. Sed tempus, orci non semper varius, tellus metus dapibus purus, sit amet placerat justo purus ut lacus.
-                Donec pretium sagittis ex, non auctor odio ornare ac. Donec sit amet condimentum lacus. Nam id blandit nisl, in venenatis orci. Nulla facilisis est ac dui malesuada, non placerat mauris sollicitudin. Praesent consectetur odio velit, eget porttitor est tempus eget. Suspendisse at ultrices neque. Sed non dictum sapien. Maecenas eu diam eleifend, aliquam eros a, congue nunc. Pellentesque sed congue libero. Etiam dictum mauris vitae erat pharetra, at sodales ligula tristique. Cras malesuada scelerisque ipsum sit amet molestie. Nunc ut orci venenatis, convallis magna porttitor, suscipit tellus. Curabitur tincidunt, diam eu volutpat ornare, enim eros varius quam, ac lobortis mi nibh sit amet orci.
-              </textpath>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo.
+                
+                </textpath>
             </text>
           </svg>
-        </div>
+  --> 
         
+        <div id="img_F"></div>
+        <div id="img_r"></div>
+
+        </div>
+        <div>
+        </div>
+
       </div>
       <div id="container_sns">
         <div id="sns_icon">
@@ -104,5 +117,7 @@
       
 
     </div>
+    <canvas id="test"></canvas>
+    <canvas id="test2"></canvas>
   </body>
 </html>
