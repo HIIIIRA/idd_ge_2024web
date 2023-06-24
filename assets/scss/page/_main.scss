@@ -61,6 +61,7 @@ body{
     position: relative;
     top: 0;
     order: -1;
+    
   };
 }
 
@@ -268,12 +269,15 @@ $delay : 0.3;
   position: relative;
   width: 100%;
   height: 100%;
-
-  @include res.res(sp) {
-    width: 104%;
-    height: 104%;
-    margin: -2%;
-  };
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  line-height: 10px;
+  
+  // @include res.res(sp) {
+  //   width: 104%;
+  //   height: 104%;
+  //   margin: -2%;
+  // };
 
   img{
     position: absolute;
@@ -285,81 +289,47 @@ $delay : 0.3;
 
   #img_F{
     position: absolute;
-    //width: 66%;
     top: 0;
     left: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    line-height: 8px;
     transform-origin: top left;
-    //transform: scale(62%,45%);
   }
   
   #img_r{
     position: absolute;
-    width: 50.6%;
     top: 0;
     right: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    line-height: 8px;
-    transform-origin: top left;
-    transform: scale(40%,34%);
+    transform-origin: top right;
   }
   
   #img_o{
-    width: 46.5%;
-    top: 36.6%;
+    position: absolute;
+    top: 37%;
     left: 0;
+    transform-origin: top left;
   }
   
   #img_m{
-    width: 47.8%;
-    top: 38.3%;
+    position: absolute;
+    top: 39%;
     right: 0;
+    transform-origin: top right;
   }
   
   #img_T{
-    width: 23.3%;
+    position: absolute;
     top: 28.7%;
     left: 0;
+    transform-origin: top left;
   }
 }
 
 
 /*------------*/
 
-svg{
-  text{
-    font-size: 10px;
-    font-family:'font';
-
-    .typewriter{
-      display: none;
-  
-      tspan{
-        //display: none;
-      }
-      
-      &::after {
-        content: "|";
-        animation: typinganime .8s ease infinite;
-      }
-  
-    }
-  }
-
-  
-}
-
-
-@keyframes typinganime{
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
+#fps{
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 

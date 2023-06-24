@@ -642,13 +642,9 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-}
-@media screen and (max-width: 850px) {
-  #title_frame {
-    width: 104%;
-    height: 104%;
-    margin: -2%;
-  }
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  line-height: 10px;
 }
 #title_frame img {
   position: absolute;
@@ -660,56 +656,36 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 8px;
-  line-height: 8px;
   transform-origin: top left;
 }
 #title_frame #img_r {
   position: absolute;
-  width: 50.6%;
   top: 0;
   right: 0;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 8px;
-  line-height: 8px;
-  transform-origin: top left;
-  transform: scale(40%, 34%);
+  transform-origin: top right;
 }
 #title_frame #img_o {
-  width: 46.5%;
-  top: 36.6%;
+  position: absolute;
+  top: 37%;
   left: 0;
+  transform-origin: top left;
 }
 #title_frame #img_m {
-  width: 47.8%;
-  top: 38.3%;
+  position: absolute;
+  top: 39%;
   right: 0;
+  transform-origin: top right;
 }
 #title_frame #img_T {
-  width: 23.3%;
+  position: absolute;
   top: 28.7%;
   left: 0;
+  transform-origin: top left;
 }
 
 /*------------*/
-svg text {
-  font-size: 10px;
-  font-family: "font";
-}
-svg text .typewriter {
-  display: none;
-}
-svg text .typewriter::after {
-  content: "|";
-  animation: typinganime 0.8s ease infinite;
-}
-
-@keyframes typinganime {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+#fps {
+  position: absolute;
+  top: 0;
+  left: 0;
 }/*# sourceMappingURL=style.css.map */
