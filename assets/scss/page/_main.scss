@@ -3,53 +3,72 @@
 @use "../global/faundation/responsive" as res;
 
 @font-face {
-  font-family: 'font';
-  src: url('../font/IBMPlexMono-Regular.woff2') format('woff2');
+  font-family: "font";
+  src: url("../font/IBMPlexMono-Regular.woff2") format("woff2");
 }
+$delay: 0.3;
 
-body{
-  background-color: #efefef;
-  margin: auto; 
+@mixin infoAnim($a) {
+  $a: $a * $delay;
+  //animation: infoAnimKeyframes 1s ease-in $a + 5s  both;
+}
+body {
+  background-color: setting.$background-white;
+  margin: auto;
+  height: 100%;
 }
 
 /*全体包括*/
-#wrapper{
+#wrapper {
   width: 100vw;
+  height: 100%;
   display: flex;
   top: 0;
   overflow: hidden;
-
+  position: relative;
   @include res.res(sp) {
     flex-direction: column;
-  };
+  }
 }
 
-.pc{
+.pc {
   @include res.res(sp) {
     display: none;
-  };
+  }
 }
 
-.sp{
-  display:none;
+.sp {
+  display: none;
 
   @include res.res(sp) {
     display: block;
-  };
+  }
 }
-
 
 /*---コンテナ---*/
-#container_info{
-  width: 35vw;
-  left: 0;
-
+#container_info {
+  width: 35%;
+  height: 100%;
+  padding-top: 24px;
+  padding-left: 24px;
+  z-index: 5;
   @include res.res(sp) {
-    width: 100vw;
-  };
+    width: 100%;
+    height: auto;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 0 4.3vw 4.8vw 4.3vw;
+    margin: 0;
+    display: flex;
+    flex-direction: row-reverse;
+
+    background: setting.$background-white;
+    background: linear-gradient(0deg, setting.$background-white 80%, rgba(255, 255, 255, 0) 100%);
+  }
 }
 
-#container_title{
+#container_title {
   width: 65vw;
   height: 78.3vw;
   position: absolute;
@@ -61,163 +80,166 @@ body{
     position: relative;
     top: 0;
     order: -1;
-    
-  };
+  }
 }
 
-#container_sns{
+#container_sns {
   position: fixed;
-  width: 188PX;
-  height: 116PX;
+  width: 188px;
+  height: 116px;
   top: 0;
   right: 0;
 
   @include res.res(sp) {
-    width: 82PX;
-    height: 150PX;
-  };
+    width: 82px;
+    height: 150px;
+  }
 }
 /*--------------*/
 
-
-
 /*---画面左---*/
-#info_top{
-  width: 22vw;
-  margin: 2.2vw;
-  
+#info_top {
+  margin-top: auto;
 
   @include res.res(sp) {
-    width: 40.8vw;
-    margin: 0 4.3vw 0 auto;
-  };
+    width: 45%;
+  }
 }
 
-#info_bottom{
-  position: fixed;
+#info_bottom {
   width: 19vw;
-  height: 22.3vw;
-  margin-bottom: 2.2vw;
-  margin-left: 2.2vw;
-  bottom: 0;
-  left: 0;
-
+  //height: 22.3vw;
+  margin-bottom: 24px;
+  margin-left: 24px;
+  @include res.res(pc) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
   @include res.res(sp) {
-    width: 50vw;
-    height: 54.4vw;
-    margin-bottom: 4.8vw;
-    margin-left: 4.3vw;
-  };
+    width: 55%;
+    height: auto;
+    margin: 0;
+  }
 }
 
-#info_bottom_hanko{
-  bottom: 0;
-  left: 0;
+#info_bottom_hanko {
   display: flex;
-  position: absolute;
+  gap: 10px;
+  @include infoAnim(5);
+  height: 5vw;
+
+  @include res.res(sp) {
+    height: 10.6vw;
+  }
+  img {
+    height: 100%;
+    width: auto;
+    mix-blend-mode: multiply;
+  }
+
+  #img_hanko2 {
+  }
 }
 
 /*------------*/
 
-
-
 /*---画面左　画像---*/
-$delay : 0.3;
 
-@mixin infoAnim($a) {
-  $a : $a * $delay;
-  //animation: infoAnimKeyframes 1s ease-in $a + 5s  both;
-}
-
-#img_title{
+#img_title {
   @include infoAnim(0);
 }
-.img_idd{
-  margin-top: 1.2vw;
+.info-top-inner {
+  width: 100%;
+  &.leftAlign {
+    .img-wrapper {
+      width: 22vw;
+      @include res.res(sp) {
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+  &.rightAlign {
+    .img-wrapper {
+      width: 22vw;
+      margin-left: auto;
+      margin-right: 6vw;
+      @include res.res(sp) {
+        width: auto;
+        margin-right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+      }
+    }
+  }
 
-  @include infoAnim(1);
+  #img_title {
+  }
+  .img_idd {
+    margin-top: 1.2vw;
 
-  @include res.res(sp) {
-    margin-top: 2vw;
-  };
-}
-
-.img_date{
-  margin-top: 2.8vw;
-
-  @include infoAnim(2);
-
-  @include res.res(sp) {
-    margin: 6.4vw 0 auto auto;
-    width: 30vw;
-  };
-}
-
-#img_venue{
-  width: 15.7vw;
-  margin-top: 1vw;
-  
-  @include infoAnim(3);
-
-  @include res.res(sp) {
-    display: block;
-    width: 30vw;
-    margin: 2vw 0 30vw auto;
-  };
-}
-
-#img_FromTo{
-  position: absolute;
-  width: 12.8vw;
-  margin-top: auto;
-  margin-bottom: 4.3vw;
-  bottom: 0;
-  
-  @include infoAnim(5);
-
-  @include res.res(sp) {
-    width: 37.3vw;
-    margin-bottom: 9.8vw;
-  };
-}
-
-#info_bottom_hanko{
-
-  @include infoAnim(5);
-
-  img{
-    height: 5vw;
-    bottom: 0;
+    @include infoAnim(1);
 
     @include res.res(sp) {
-      height: 10.6vw;
-    };
+      margin-top: 2vw;
+    }
   }
 
-  #img_hanko2{
-    margin-left: 1.1vw;
+  .img_date {
+    margin-top: 2.8vw;
+    @include infoAnim(2);
+
+    @include res.res(sp) {
+      margin-top: 6.4vw;
+      width: 70%;
+    }
+  }
+
+  #img_venue {
+    width: 15.7vw;
+    margin-top: 1vw;
+
+    @include infoAnim(3);
+
+    @include res.res(sp) {
+      display: block;
+
+      width: 70%;
+    }
   }
 }
 
+#img_FromTo {
+  margin-bottom: -20px;
 
-@keyframes infoAnimKeyframes{
-  0%{
-    opacity:0;
+  @include infoAnim(5);
+
+  @include res.res(sp) {
+    margin-top: auto;
+    width: 37.3vw;
+  }
+}
+
+#info_bottom_hanko {
+}
+
+@keyframes infoAnimKeyframes {
+  0% {
+    opacity: 0;
     filter: blur(6px);
   }
-  
-  100%{
-    opacity:1;
+
+  100% {
+    opacity: 1;
     filter: blur(0px);
   }
-
 }
 /*--------------*/
 
-
-
 /*---SNSアイコン---*/
-#sns_icon{
+#sns_icon {
   display: flex;
   position: absolute;
   width: fit-content;
@@ -228,29 +250,29 @@ $delay : 0.3;
 
   @include res.res(sp) {
     flex-direction: column;
-  };
-
-  #twitter{
-    background-color: black;
   }
-  
-  #instagram{
-    background-color: white;
+
+  #twitter {
+    background-color: setting.$white;
+  }
+
+  #instagram {
+    background-color: setting.$white;
     margin-left: 20px;
 
     @include res.res(sp) {
       margin-top: 16px;
       margin-left: 0;
-    };
+    }
   }
 }
 
-.sns_round{
+.sns_round {
   width: 52px;
   height: 52px;
   border-radius: 50%;
 
-  img{
+  img {
     position: relative;
     width: 29px;
     top: 50%;
@@ -259,63 +281,60 @@ $delay : 0.3;
   }
 }
 
-
 /*--------------*/
 
-
-
 /*---画面右---*/
-#title_frame{
+#title_frame {
   position: relative;
   width: 100%;
   height: 100%;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-size: 10px;
   line-height: 10px;
-  
+
   // @include res.res(sp) {
   //   width: 104%;
   //   height: 104%;
   //   margin: -2%;
   // };
 
-  img{
+  img {
     position: absolute;
   }
 
-  svg{
+  svg {
     position: absolute;
   }
 
-  #img_F{
+  #img_F {
     position: absolute;
     top: 0;
     left: 0;
     transform-origin: top left;
   }
-  
-  #img_r{
+
+  #img_r {
     position: absolute;
     top: 0;
     right: 0;
     transform-origin: top right;
   }
-  
-  #img_o{
+
+  #img_o {
     position: absolute;
     top: 37%;
     left: 0;
     transform-origin: top left;
   }
-  
-  #img_m{
+
+  #img_m {
     position: absolute;
     top: 39%;
     right: 0;
     transform-origin: top right;
   }
-  
-  #img_T{
+
+  #img_T {
     position: absolute;
     top: 28.7%;
     left: 0;
@@ -323,13 +342,10 @@ $delay : 0.3;
   }
 }
 
-
 /*------------*/
 
-#fps{
+#fps {
   position: absolute;
   top: 0;
   left: 0;
 }
-
-

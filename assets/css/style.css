@@ -71,6 +71,8 @@ time,
 mark,
 audio,
 video {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   letter-spacing: 0;
   vertical-align: baseline;
@@ -281,130 +283,6 @@ select {
   vertical-align: middle;
 }
 
-.button-more-wrapper {
-  border: 1.5px solid #000000;
-  background-color: #ffffff;
-  margin-top: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 36px;
-  width: 140px;
-  border-radius: 1000px;
-  transition-duration: 0.4s;
-}
-@media screen and (max-width: 850px) {
-  .button-more-wrapper {
-    margin-top: 8px;
-  }
-}
-.button-more-wrapper:hover {
-  transform: scale(1.05);
-}
-.button-more-wrapper .button-more {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-.button-more-wrapper .button-more .text {
-  font-family: "Noto Sans JP", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  line-height: 1.6em;
-  color: #000000;
-  font-weight: 700;
-}
-.button-more-wrapper .button-more .arrow-img-wrapper {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  right: 0;
-  top: 40%;
-}
-.button-more-wrapper .button-more .arrow-img-wrapper .img {
-  height: 100%;
-  color: #ffffff;
-}
-
-.hamburger-wrapper {
-  margin: auto 0;
-  display: none;
-}
-@media screen and (max-width: 850px) {
-  .hamburger-wrapper {
-    display: block;
-  }
-}
-
-.hamburger {
-  width: 40px;
-  height: 25px;
-  position: relative;
-  transition: 0.5s; /* 追記 */
-}
-
-.hamburger span {
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background-color: #000000;
-  transition: 0.5s; /* 追記 */
-}
-
-.hamburger span:first-of-type {
-  /* ハンバーガーメニューの1番目の線 */
-  top: 0;
-}
-
-.hamburger span:nth-of-type(2) {
-  /* ハンバーガーメニューの2番目の線 */
-  top: 50%;
-}
-
-.hamburger span:last-of-type {
-  /* ハンバーガーメニューの3番目の線 */
-  top: 100%;
-}
-
-.hamburger.active {
-  transform: rotateY(360deg);
-}
-
-.hamburger.active span:first-of-type {
-  /* ハンバーガーメニューの1番目の線 */
-  top: 50%;
-  transform: rotate(45deg);
-}
-
-.hamburger.active span:nth-of-type(2) {
-  /* ハンバーガーメニューの2番目の線 */
-  opacity: 0; /* 透明にする */
-}
-
-.hamburger.active span:last-of-type {
-  /* ハンバーガーメニューの3番目の線 */
-  top: 50%;
-  transform: rotate(-45deg);
-}
-
-@media screen and (max-width: 850px) {
-  .slide-menu {
-    height: calc(100% - 80px);
-    position: fixed;
-    width: 100%;
-    top: 80px;
-    right: -100%;
-    transition: 0.5s;
-  }
-}
-.slide-menu.active {
-  right: 0;
-}
-
 @font-face {
   font-family: "font";
   src: url("../font/IBMPlexMono-Regular.woff2") format("woff2");
@@ -412,14 +290,17 @@ select {
 body {
   background-color: #efefef;
   margin: auto;
+  height: 100%;
 }
 
 /*全体包括*/
 #wrapper {
   width: 100vw;
+  height: 100%;
   display: flex;
   top: 0;
   overflow: hidden;
+  position: relative;
 }
 @media screen and (max-width: 850px) {
   #wrapper {
@@ -444,12 +325,25 @@ body {
 
 /*---コンテナ---*/
 #container_info {
-  width: 35vw;
-  left: 0;
+  width: 35%;
+  height: 100%;
+  padding-top: 24px;
+  padding-left: 24px;
+  z-index: 5;
 }
 @media screen and (max-width: 850px) {
   #container_info {
-    width: 100vw;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 0 4.3vw 4.8vw 4.3vw;
+    margin: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    background: #efefef;
+    background: linear-gradient(0deg, #efefef 80%, rgba(255, 255, 255, 0) 100%);
   }
 }
 
@@ -471,114 +365,128 @@ body {
 
 #container_sns {
   position: fixed;
-  width: 188PX;
-  height: 116PX;
+  width: 188px;
+  height: 116px;
   top: 0;
   right: 0;
 }
 @media screen and (max-width: 850px) {
   #container_sns {
-    width: 82PX;
-    height: 150PX;
+    width: 82px;
+    height: 150px;
   }
 }
 
 /*--------------*/
 /*---画面左---*/
 #info_top {
-  width: 22vw;
-  margin: 2.2vw;
+  margin-top: auto;
 }
 @media screen and (max-width: 850px) {
   #info_top {
-    width: 40.8vw;
-    margin: 0 4.3vw 0 auto;
+    width: 45%;
   }
 }
 
 #info_bottom {
-  position: fixed;
   width: 19vw;
-  height: 22.3vw;
-  margin-bottom: 2.2vw;
-  margin-left: 2.2vw;
-  bottom: 0;
-  left: 0;
+  margin-bottom: 24px;
+  margin-left: 24px;
+}
+@media screen and (min-width: 851px) {
+  #info_bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
 }
 @media screen and (max-width: 850px) {
   #info_bottom {
-    width: 50vw;
-    height: 54.4vw;
-    margin-bottom: 4.8vw;
-    margin-left: 4.3vw;
+    width: 55%;
+    height: auto;
+    margin: 0;
   }
 }
 
 #info_bottom_hanko {
-  bottom: 0;
-  left: 0;
   display: flex;
-  position: absolute;
+  gap: 10px;
+  height: 5vw;
 }
-
+@media screen and (max-width: 850px) {
+  #info_bottom_hanko {
+    height: 10.6vw;
+  }
+}
+#info_bottom_hanko img {
+  height: 100%;
+  width: auto;
+  mix-blend-mode: multiply;
+}
 /*------------*/
 /*---画面左　画像---*/
-.img_idd {
+.info-top-inner {
+  width: 100%;
+}
+.info-top-inner.leftAlign .img-wrapper {
+  width: 22vw;
+}
+@media screen and (max-width: 850px) {
+  .info-top-inner.leftAlign .img-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+}
+.info-top-inner.rightAlign .img-wrapper {
+  width: 22vw;
+  margin-left: auto;
+  margin-right: 6vw;
+}
+@media screen and (max-width: 850px) {
+  .info-top-inner.rightAlign .img-wrapper {
+    width: auto;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+}
+.info-top-inner .img_idd {
   margin-top: 1.2vw;
 }
 @media screen and (max-width: 850px) {
-  .img_idd {
+  .info-top-inner .img_idd {
     margin-top: 2vw;
   }
 }
-
-.img_date {
+.info-top-inner .img_date {
   margin-top: 2.8vw;
 }
 @media screen and (max-width: 850px) {
-  .img_date {
-    margin: 6.4vw 0 auto auto;
-    width: 30vw;
+  .info-top-inner .img_date {
+    margin-top: 6.4vw;
+    width: 70%;
   }
 }
-
-#img_venue {
+.info-top-inner #img_venue {
   width: 15.7vw;
   margin-top: 1vw;
 }
 @media screen and (max-width: 850px) {
-  #img_venue {
+  .info-top-inner #img_venue {
     display: block;
-    width: 30vw;
-    margin: 2vw 0 30vw auto;
+    width: 70%;
   }
 }
 
 #img_FromTo {
-  position: absolute;
-  width: 12.8vw;
-  margin-top: auto;
-  margin-bottom: 4.3vw;
-  bottom: 0;
+  margin-bottom: -20px;
 }
 @media screen and (max-width: 850px) {
   #img_FromTo {
+    margin-top: auto;
     width: 37.3vw;
-    margin-bottom: 9.8vw;
   }
-}
-
-#info_bottom_hanko img {
-  height: 5vw;
-  bottom: 0;
-}
-@media screen and (max-width: 850px) {
-  #info_bottom_hanko img {
-    height: 10.6vw;
-  }
-}
-#info_bottom_hanko #img_hanko2 {
-  margin-left: 1.1vw;
 }
 
 @keyframes infoAnimKeyframes {
@@ -596,9 +504,7 @@ body {
 #sns_icon {
   display: flex;
   position: absolute;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   top: 50%;
   left: 50%;
@@ -610,10 +516,10 @@ body {
   }
 }
 #sns_icon #twitter {
-  background-color: black;
+  background-color: #ffffff;
 }
 #sns_icon #instagram {
-  background-color: white;
+  background-color: #ffffff;
   margin-left: 20px;
 }
 @media screen and (max-width: 850px) {
@@ -688,4 +594,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
