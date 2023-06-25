@@ -523,8 +523,13 @@ body {
 
 /*------------*/
 /*---画面左　画像---*/
+#img_title {
+  animation: infoAnimKeyframes 1s ease-in 1s both;
+}
+
 .img_idd {
   margin-top: 1.2vw;
+  animation: infoAnimKeyframes 1s ease-in 1.3s both;
 }
 @media screen and (max-width: 850px) {
   .img_idd {
@@ -534,6 +539,7 @@ body {
 
 .img_date {
   margin-top: 2.8vw;
+  animation: infoAnimKeyframes 1s ease-in 1.6s both;
 }
 @media screen and (max-width: 850px) {
   .img_date {
@@ -545,6 +551,7 @@ body {
 #img_venue {
   width: 15.7vw;
   margin-top: 1vw;
+  animation: infoAnimKeyframes 1s ease-in 1.9s both;
 }
 @media screen and (max-width: 850px) {
   #img_venue {
@@ -560,6 +567,7 @@ body {
   margin-top: auto;
   margin-bottom: 4.3vw;
   bottom: 0;
+  animation: infoAnimKeyframes 1s ease-in 2.5s both;
 }
 @media screen and (max-width: 850px) {
   #img_FromTo {
@@ -568,6 +576,9 @@ body {
   }
 }
 
+#info_bottom_hanko {
+  animation: infoAnimKeyframes 1s ease-in 2.5s both;
+}
 #info_bottom_hanko img {
   height: 5vw;
   bottom: 0;
@@ -645,6 +656,7 @@ body {
   font-family: "IBM Plex Mono", monospace;
   font-size: 10px;
   line-height: 10px;
+  animation: infoAnimKeyframes 1s ease-in 0.7s both;
 }
 #title_frame img {
   position: absolute;
@@ -657,30 +669,127 @@ body {
   top: 0;
   left: 0;
   transform-origin: top left;
+  background-color: #efefef;
 }
 #title_frame #img_r {
   position: absolute;
   top: 0;
   right: 0;
   transform-origin: top right;
+  background-color: #efefef;
 }
 #title_frame #img_o {
   position: absolute;
-  top: 37%;
+  top: 0;
   left: 0;
   transform-origin: top left;
+  background-color: #efefef;
 }
 #title_frame #img_m {
   position: absolute;
-  top: 39%;
+  top: 0;
   right: 0;
   transform-origin: top right;
+  background-color: #efefef;
 }
 #title_frame #img_T {
   position: absolute;
-  top: 28.7%;
+  top: 0;
   left: 0;
   transform-origin: top left;
+  background-color: #efefef;
+}
+#title_frame #back_F {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 65%;
+}
+#title_frame #back_r {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+}
+#title_frame #back_o {
+  position: absolute;
+  top: 37%;
+  left: 0;
+  width: 46%;
+}
+#title_frame #back_m {
+  position: absolute;
+  top: 39%;
+  right: 0;
+  width: 48%;
+}
+#title_frame #back_T {
+  position: absolute;
+  top: 28.7%;
+  left: 0;
+  width: 23%;
+}
+#title_frame #mask_F {
+  width: 66%;
+  height: 35%;
+  -webkit-mask-image: url(../img/mask_F.svg);
+          mask-image: url(../img/mask_F.svg);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+}
+#title_frame #mask_r {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 67%;
+  -webkit-mask-image: url(../img/mask_r.svg);
+          mask-image: url(../img/mask_r.svg);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+}
+#title_frame #mask_o {
+  position: absolute;
+  top: 37%;
+  left: 0;
+  width: 46%;
+  height: 45%;
+  -webkit-mask-image: url(../img/mask_o.svg);
+          mask-image: url(../img/mask_o.svg);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+}
+#title_frame #mask_m {
+  position: absolute;
+  top: 39%;
+  right: 0;
+  width: 48%;
+  height: 69%;
+  -webkit-mask-image: url(../img/mask_m.svg);
+          mask-image: url(../img/mask_m.svg);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+}
+#title_frame #mask_T {
+  position: absolute;
+  top: 28.7%;
+  left: 0;
+  width: 23%;
+  height: 32%;
+  -webkit-mask-image: url(../img/mask_T.svg);
+          mask-image: url(../img/mask_T.svg);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
 }
 
 /*------------*/
