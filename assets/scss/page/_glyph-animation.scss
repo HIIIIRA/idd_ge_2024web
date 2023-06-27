@@ -1,6 +1,7 @@
 @use "../setting" as setting;
 @use "../global/mixin/" as mixin;
 @use "../global/faundation/responsive" as res;
+@use "../global/animation/" as anim;
 
 #title_frame {
   position: relative;
@@ -11,7 +12,7 @@
   line-height: 10px;
   letter-spacing: 1em;
 
-  @include infoAnim(-1);
+  @include anim.infoAnim(-1);
 
   // @include res.res(sp) {
   //   width: 104%;
@@ -59,6 +60,9 @@
     mask-image: url(../img/mask_F.svg);
     mask-repeat: no-repeat;
     mask-size: 100%;
+    -webkit-mask-image: url(../img/mask_F.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
 
     #img_F {
       position: absolute;
@@ -78,6 +82,9 @@
     mask-image: url(../img/mask_r.svg);
     mask-repeat: no-repeat;
     mask-size: 100%;
+    -webkit-mask-image: url(../img/mask_r.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
 
     #img_r {
       position: absolute;
@@ -97,6 +104,9 @@
     mask-image: url(../img/mask_o.svg);
     mask-repeat: no-repeat;
     mask-size: 100%;
+    -webkit-mask-image: url(../img/mask_o.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
 
     #img_o {
       position: absolute;
@@ -116,6 +126,9 @@
     mask-image: url(../img/mask_m.svg);
     mask-repeat: no-repeat;
     mask-size: 100%;
+    -webkit-mask-image: url(../img/mask_m.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
 
     #img_m {
       position: absolute;
@@ -135,6 +148,9 @@
     mask-image: url(../img/mask_T.svg);
     mask-repeat: no-repeat;
     mask-size: 100%;
+    -webkit-mask-image: url(../img/mask_T.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
 
     #img_T {
       position: absolute;
