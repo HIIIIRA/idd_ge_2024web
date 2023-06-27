@@ -543,5 +543,57 @@ body {
 }
 
 /*--------------*/
+/*---画面右---*/
+#title_frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  line-height: 10px;
+}
+#title_frame img {
+  position: absolute;
+}
+#title_frame svg {
+  position: absolute;
+}
+#title_frame #img_F {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+#title_frame #img_r {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: top right;
+}
+#title_frame #img_o {
+  position: absolute;
+  top: 37%;
+  left: 0;
+  transform-origin: top left;
+}
+#title_frame #img_m {
+  position: absolute;
+  top: 39%;
+  right: 0;
+  transform-origin: top right;
+}
+#title_frame #img_T {
+  position: absolute;
+  top: 28.7%;
+  left: 0;
+  transform-origin: top left;
+}
+
+/*------------*/
+#fps {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 /*# sourceMappingURL=style.css.map */
