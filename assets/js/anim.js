@@ -106,24 +106,27 @@ function animation(){
   var c = new Array(Glyph.length).fill(0);
   var fin = new Array(Glyph.length).fill(false);
   var sp = 50;
-  var reg = new RegExp(`.{1,${sp}}`, 'g'); 
 
   if(mobile){
     sp = Math.round(sp / pixelSize_rate);
   }
 
+  var reg = new RegExp(`.{1,${sp}}`, 'g'); 
+  var regex = new RegExp("[^凸]", "g");
+
   var str = [];
-  // var t = [];
+  var string2 = [];
+  var origin = [];
 
   for(let i = 0; i < Glyph.length; i++){
-    var st = [];
-    string[i] = $(Glyph[i]).html().match(reg);
+    origin[i] = $(Glyph[i]).html();
+    string[i] = origin[i].match(reg);
 
     $(Glyph[i]).html("");
     $(Glyph[i]).fadeIn(0);
   }
 
-  function animationLoop(){
+  function appearLoop(){
     $(Glyph).each(function(i){
       if(i == 0){
 
@@ -133,6 +136,7 @@ function animation(){
       }
 
       if(string[i].length <= [c[i]]){
+        $("#back_" + Glyph[i].id.replace("img_", "")).css({"display":"none"});
         fin[i] = true;
         return true;
       }
@@ -158,15 +162,84 @@ function animation(){
     }
 
     if(!fin.every(i => i == true)){
-      requestAnimationFrame(animationLoop);
+      requestAnimationFrame(appearLoop);
     }else{
-      let animationFPS = document.getElementById("fps");
-      animationFPS.innerHTML = "all finish";
+      for(let i = 0; i < Glyph.length; i++){
+        str[i] = origin[i].replace(/&nbsp;/g,"凹").replace(/<br>/g,"凸");
+        string2[i] = str[i].match(reg);
+        c[i] = 0;
+        
+        
+    
+        //$(Glyph[i]).html("");
+        //$(Glyph[i]).fadeIn(0);
+      }
+      disappearLoop();
+
+      // let animationFPS = document.getElementById("fps");
+      // animationFPS.innerHTML = "all finish";
     }
     
   }
+
+ 
+  
+
+  function disappearLoop(){
+    $(Glyph).each(function(i){
+      if(i == 0){
+
+      }else if(c[i - 1] < string2[i].length / 4){
+        c[i] = 0;
+        return true;
+      }
+
+      if(string2[i].length <= c[i]){
+        //$("#back_" + Glyph[i].id.replace("img_", "")).css({"display":"none"});
+        fin[i] = false;
+        return true;
+      }
+
+      var newText = string2[i][c[i]].replace(regex, "凹");
+      str[i] = str[i].substring(0, (c[i] * sp)) + newText + str[i].substring((c[i] * sp) + sp );
+      //tex[i] += addTex;
+      //tex[i] += str[i][c[i]];
+      var t = str[i];
+
+      $(Glyph[i]).html(t.replace(/凹/g,"&nbsp;").replace(/凸/g,"<br>"));
+
+      c[i] ++;
+    });
+
+    frameCount ++;
+    endTime = new Date().getTime();
+    if(endTime - startTime >= 1000){
+        fps = frameCount;
+        frameCount = 0;
+        startTime = new Date().getTime();
+        let animationFPS = document.getElementById("fps");
+        animationFPS.innerHTML = "fps : " + fps;
+    }
+
+    if(!fin.every(i => i == false)){
+      requestAnimationFrame(disappearLoop);
+    }else{
+      for(let i = 0; i < Glyph.length; i++){
+        string[i] = origin[i].match(reg);
+        c[i] = 0;
+        tex[i] = "";
+    
+        //$(Glyph[i]).html("");
+        //$(Glyph[i]).fadeIn(0);
+      }
+      appearLoop();
+    }
+    
+  }
+
+
   $(this).delay(4000).queue(function(){
-    animationLoop();
+    appearLoop();
   });
   
 }
@@ -188,9 +261,9 @@ function ReSize(s){
 const getGlyphSize = function(s, i){
   var titleWidth = $('#container_title').width();
   var [sizeW,sizeH] = size(Glyph[i].id.replace("img_", ""));
-  var w = Math.round(sizeW * s);
-  var h = Math.round(w * aspect[i]);
   var [fontW, fontH] = getFontSize();
+  var w = Math.round(sizeW * s);
+  var h = Math.round(w * aspect[i] * fontW/fontH);
   //var ad = Math.pow((1 - (1 / s)), 2);
   var ad = 1;
 
@@ -223,6 +296,7 @@ const getFontSize = function(){
   var width = span.clientWidth;
 
   span.parentElement.removeChild(span);
+  console.log(width +":"+ height);
 
   return [width, height];
 }
@@ -252,11 +326,3 @@ const size = function(id){
 
   return [w,h];
 }
-
-// var size = [
-//   [ 0.66, 0.36],
-//   [ 0.50, 0.67],
-//   [ 0.46, 0.45],
-//   [ 0.48, 0.69],
-//   [ 0.23, 0.32]
-// ];
