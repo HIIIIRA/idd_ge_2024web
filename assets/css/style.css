@@ -407,6 +407,7 @@ body {
 #info_bottom_hanko {
   display: flex;
   gap: 10px;
+  animation: infoAnimKeyframes 1s ease-in 2.5s both;
   height: 5vw;
 }
 @media screen and (max-width: 850px) {
@@ -421,34 +422,22 @@ body {
 }
 /*------------*/
 /*---画面左　画像---*/
+#img_title {
+  animation: infoAnimKeyframes 1s ease-in 1s both;
+}
+
 .info-top-inner {
-  width: 100%;
-}
-.info-top-inner.leftAlign .img-wrapper {
   width: 22vw;
 }
 @media screen and (max-width: 850px) {
-  .info-top-inner.leftAlign .img-wrapper {
+  .info-top-inner {
     width: 100%;
-    margin: 0;
-  }
-}
-.info-top-inner.rightAlign .img-wrapper {
-  width: 22vw;
-  margin-left: auto;
-  margin-right: 6vw;
-}
-@media screen and (max-width: 850px) {
-  .info-top-inner.rightAlign .img-wrapper {
-    width: auto;
-    margin-right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+    margin-left: 0;
   }
 }
 .info-top-inner .img_idd {
   margin-top: 1.2vw;
+  animation: infoAnimKeyframes 1s ease-in 1.3s both;
 }
 @media screen and (max-width: 850px) {
   .info-top-inner .img_idd {
@@ -457,32 +446,41 @@ body {
 }
 .info-top-inner .img_date {
   margin-top: 2.8vw;
+  animation: infoAnimKeyframes 1s ease-in 1.6s both;
 }
 @media screen and (max-width: 850px) {
   .info-top-inner .img_date {
     margin-top: 6.4vw;
     width: 70%;
+    margin-left: auto;
   }
 }
 .info-top-inner #img_venue {
   width: 15.7vw;
   margin-top: 1vw;
+  animation: infoAnimKeyframes 1s ease-in 1.9s both;
 }
 @media screen and (max-width: 850px) {
   .info-top-inner #img_venue {
     display: block;
     width: 70%;
+    margin-left: auto;
   }
 }
 
 #img_FromTo {
   margin-bottom: -20px;
+  animation: infoAnimKeyframes 1s ease-in 2.5s both;
 }
 @media screen and (max-width: 850px) {
   #img_FromTo {
     margin-top: auto;
     width: 37.3vw;
   }
+}
+
+#info_bottom_hanko {
+  animation: infoAnimKeyframes 1s ease-in 2.5s both;
 }
 
 @keyframes infoAnimKeyframes {
@@ -547,6 +545,7 @@ body {
   font-size: 10px;
   line-height: 10px;
   letter-spacing: 1em;
+  animation: infoAnimKeyframes 1s ease-in 0.7s both;
 }
 #title_frame img {
   position: absolute;

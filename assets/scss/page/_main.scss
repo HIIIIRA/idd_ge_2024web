@@ -141,29 +141,10 @@ body {
   @include anim.infoAnim(0);
 }
 .info-top-inner {
-  width: 100%;
-  &.leftAlign {
-    .img-wrapper {
-      width: 22vw;
-      @include res.res(sp) {
-        width: 100%;
-        margin: 0;
-      }
-    }
-  }
-  &.rightAlign {
-    .img-wrapper {
-      width: 22vw;
-      margin-left: auto;
-      margin-right: 6vw;
-      @include res.res(sp) {
-        width: auto;
-        margin-right: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-      }
-    }
+  width: 22vw;
+  @include res.res(sp) {
+    width: 100%;
+    margin-left: 0;
   }
 
   #img_title {
@@ -185,6 +166,7 @@ body {
     @include res.res(sp) {
       margin-top: 6.4vw;
       width: 70%;
+      margin-left: auto;
     }
   }
 
@@ -196,8 +178,8 @@ body {
 
     @include res.res(sp) {
       display: block;
-
       width: 70%;
+      margin-left: auto;
     }
   }
 }
