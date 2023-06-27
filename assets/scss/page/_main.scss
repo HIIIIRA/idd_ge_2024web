@@ -7,16 +7,16 @@ body {
   background-color: setting.$background-white;
   margin: auto;
   height: 100%;
+  overscroll-behavior: none;
 }
 
 /*全体包括*/
 #wrapper {
-  width: 100vw;
   height: 100%;
   display: flex;
-  top: 0;
+  flex-direction: row-reverse;
   overflow: hidden;
-  position: relative;
+
   @include res.res(sp) {
     flex-direction: column;
   }
@@ -42,6 +42,10 @@ body {
   height: 100%;
   padding-top: 24px;
   padding-left: 24px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   z-index: 5;
   @include res.res(sp) {
     width: 100%;
@@ -51,7 +55,7 @@ body {
     bottom: 0;
     padding: 0 4.3vw 4.8vw 4.3vw;
     margin: 0;
-    display: flex;
+    // display: flex;
     flex-direction: row-reverse;
 
     background: setting.$background-white;
@@ -60,9 +64,11 @@ body {
 }
 
 #container_title {
-  width: 65vw;
+  width: 65%;
   height: 78.3vw;
-  position: absolute;
+  //position: absolute;
+  overscroll-behavior: none;
+
   right: 0;
 
   @include res.res(sp) {
@@ -90,23 +96,27 @@ body {
 
 /*---画面左---*/
 #info_top {
-  margin-top: auto;
-
   @include res.res(sp) {
+    margin-top: auto;
     width: 45%;
+  }
+  .info-top-inner {
+    width: 22vw;
+    @include res.res(sp) {
+      width: 100%;
+      margin-left: 0;
+    }
   }
 }
 
 #info_bottom {
   width: 19vw;
   //height: 22.3vw;
-  margin-bottom: 24px;
-  margin-left: 24px;
-  @include res.res(pc) {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-  }
+  // @include res.res(pc) {
+  //   position: fixed;
+  //   bottom: 0;
+  //   left: 0;
+  // }
   @include res.res(sp) {
     width: 55%;
     height: auto;
@@ -140,47 +150,40 @@ body {
 #img_title {
   @include anim.infoAnim(0);
 }
-.info-top-inner {
-  width: 22vw;
+
+#img_title {
+}
+.img_idd {
+  margin-top: 1.2vw;
+
+  @include anim.infoAnim(1);
+
   @include res.res(sp) {
-    width: 100%;
-    margin-left: 0;
+    margin-top: 2vw;
   }
+}
 
-  #img_title {
+.img_date {
+  margin-top: 2.8vw;
+  @include anim.infoAnim(2);
+
+  @include res.res(sp) {
+    margin-top: 6.4vw;
+    width: 70%;
+    margin-left: auto;
   }
-  .img_idd {
-    margin-top: 1.2vw;
+}
 
-    @include anim.infoAnim(1);
+#img_venue {
+  width: 15.7vw;
+  margin-top: 1vw;
 
-    @include res.res(sp) {
-      margin-top: 2vw;
-    }
-  }
+  @include anim.infoAnim(3);
 
-  .img_date {
-    margin-top: 2.8vw;
-    @include anim.infoAnim(2);
-
-    @include res.res(sp) {
-      margin-top: 6.4vw;
-      width: 70%;
-      margin-left: auto;
-    }
-  }
-
-  #img_venue {
-    width: 15.7vw;
-    margin-top: 1vw;
-
-    @include anim.infoAnim(3);
-
-    @include res.res(sp) {
-      display: block;
-      width: 70%;
-      margin-left: auto;
-    }
+  @include res.res(sp) {
+    display: block;
+    width: 70%;
+    margin-left: auto;
   }
 }
 
