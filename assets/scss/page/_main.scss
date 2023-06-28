@@ -241,6 +241,12 @@ body {
 
   #twitter {
     background-color: setting.$white;
+    position: relative;
+    .Twitter_Outline {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   }
 
   #instagram {
@@ -258,13 +264,14 @@ body {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-
-  img {
-    position: relative;
-    width: 29px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  &.instagram {
+    img {
+      position: relative;
+      width: 29px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 

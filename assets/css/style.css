@@ -525,6 +525,12 @@ body {
 }
 #sns_icon #twitter {
   background-color: #ffffff;
+  position: relative;
+}
+#sns_icon #twitter .Twitter_Outline {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 #sns_icon #instagram {
   background-color: #ffffff;
@@ -542,7 +548,7 @@ body {
   height: 52px;
   border-radius: 50%;
 }
-.sns_round img {
+.sns_round.instagram img {
   position: relative;
   width: 29px;
   top: 50%;
