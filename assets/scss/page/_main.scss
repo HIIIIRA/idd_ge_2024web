@@ -7,18 +7,29 @@ body {
   background-color: setting.$background-white;
   margin: auto;
   height: 100%;
-  overscroll-behavior: none;
+  overflow: hidden;
 }
 
 /*全体包括*/
 #wrapper {
   height: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  overflow: hidden;
+  width: 100%;
 
-  @include res.res(sp) {
-    flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .wrapper-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    @include res.res(sp) {
+      flex-direction: column;
+    }
   }
 }
 
@@ -38,8 +49,10 @@ body {
 
 /*---コンテナ---*/
 #container_info {
-  width: 35%;
+  width: 400px;
   height: 100%;
+  position: absolute;
+  left: 0;
   padding-top: 24px;
   padding-left: 24px;
   padding-bottom: 24px;
@@ -47,6 +60,9 @@ body {
   flex-direction: column;
   justify-content: space-between;
   z-index: 5;
+  background: setting.$background-white;
+  background: linear-gradient(90deg, setting.$background-white 85%, rgba(255, 255, 255, 0) 100%);
+
   @include res.res(sp) {
     width: 100%;
     height: auto;
@@ -66,8 +82,6 @@ body {
 #container_title {
   width: 65%;
   height: 78.3vw;
-  //position: absolute;
-  overscroll-behavior: none;
 
   right: 0;
 
@@ -75,7 +89,6 @@ body {
     width: 100vw;
     height: 120.4vw;
     position: relative;
-    top: 0;
     order: -1;
   }
 }
@@ -96,55 +109,27 @@ body {
 
 /*---画面左---*/
 #info_top {
+  width: 350px;
   @include res.res(sp) {
     margin-top: auto;
+    height: 90%;
     width: 45%;
   }
   .info-top-inner {
-    width: 22vw;
+    height: 100%;
     @include res.res(sp) {
       width: 100%;
       margin-left: 0;
     }
+    img {
+      width: 100%;
+      margin-bottom: 16px;
+      @include res.res(sp) {
+        margin-bottom: 8px;
+      }
+    }
   }
 }
-
-#info_bottom {
-  width: 19vw;
-  //height: 22.3vw;
-  // @include res.res(pc) {
-  //   position: fixed;
-  //   bottom: 0;
-  //   left: 0;
-  // }
-  @include res.res(sp) {
-    width: 55%;
-    height: auto;
-    margin: 0;
-  }
-}
-
-#info_bottom_hanko {
-  display: flex;
-  gap: 10px;
-  @include anim.infoAnim(5);
-  height: 5vw;
-
-  @include res.res(sp) {
-    height: 10.6vw;
-  }
-  img {
-    height: 100%;
-    width: auto;
-    mix-blend-mode: multiply;
-  }
-
-  #img_hanko2 {
-  }
-}
-
-/*------------*/
-
 /*---画面左　画像---*/
 
 #img_title {
@@ -154,30 +139,24 @@ body {
 #img_title {
 }
 .img_idd {
-  margin-top: 1.2vw;
-
   @include anim.infoAnim(1);
-
+  margin-bottom: 32px !important;
   @include res.res(sp) {
-    margin-top: 2vw;
   }
 }
 
 .img_date {
-  margin-top: 2.8vw;
   @include anim.infoAnim(2);
 
   @include res.res(sp) {
-    margin-top: 6.4vw;
     width: 70%;
     margin-left: auto;
   }
 }
 
 #img_venue {
-  width: 15.7vw;
-  margin-top: 1vw;
-
+  width: 75% !important;
+  margin-bottom: 0 !important;
   @include anim.infoAnim(3);
 
   @include res.res(sp) {
@@ -185,21 +164,6 @@ body {
     width: 70%;
     margin-left: auto;
   }
-}
-
-#img_FromTo {
-  margin-bottom: -20px;
-
-  @include anim.infoAnim(5);
-
-  @include res.res(sp) {
-    margin-top: auto;
-    width: 37.3vw;
-  }
-}
-
-#info_bottom_hanko {
-  @include anim.infoAnim(5);
 }
 
 @keyframes infoAnimKeyframes {
@@ -214,6 +178,52 @@ body {
   }
 }
 /*--------------*/
+
+#info_bottom {
+  height: (300px - 20px);
+  width: 100%;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: end;
+  @include res.res(sp) {
+    width: 55%;
+    height: auto;
+    margin: 0;
+  }
+}
+#img_FromTo {
+  margin-bottom: -5%;
+  height: 77%;
+  width: auto;
+  @include anim.infoAnim(5);
+
+  @include res.res(sp) {
+    margin-top: auto;
+    height: 80%;
+  }
+}
+#info_bottom_hanko {
+  display: flex;
+  gap: 10px;
+  @include anim.infoAnim(5);
+  height: 28%;
+
+  @include res.res(sp) {
+    height: 20%;
+  }
+  img {
+    height: 100%;
+    width: auto;
+    mix-blend-mode: multiply;
+  }
+
+  #img_hanko2 {
+  }
+}
+
+/*------------*/
 
 /*---SNSアイコン---*/
 #sns_icon {
