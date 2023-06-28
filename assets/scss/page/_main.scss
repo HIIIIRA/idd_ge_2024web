@@ -122,7 +122,6 @@ body {
       margin-left: 0;
     }
     img {
-      width: 100%;
       margin-bottom: 16px;
       @include res.res(sp) {
         margin-bottom: 8px;
@@ -140,7 +139,7 @@ body {
 }
 .img_idd {
   @include anim.infoAnim(1);
-  margin-bottom: 32px !important;
+  margin-bottom: 32px;
   @include res.res(sp) {
   }
 }
@@ -155,7 +154,7 @@ body {
 }
 
 #img_venue {
-  width: 75% !important;
+  width: 75%;
   margin-bottom: 0 !important;
   @include anim.infoAnim(3);
 

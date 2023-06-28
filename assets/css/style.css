@@ -409,7 +409,6 @@ body {
   }
 }
 #info_top .info-top-inner img {
-  width: 100%;
   margin-bottom: 16px;
 }
 @media screen and (max-width: 850px) {
@@ -425,7 +424,7 @@ body {
 
 .img_idd {
   animation: infoAnimKeyframes 1s ease-in 1.3s both;
-  margin-bottom: 32px !important;
+  margin-bottom: 32px;
 }
 .img_date {
   animation: infoAnimKeyframes 1s ease-in 1.6s both;
@@ -438,7 +437,7 @@ body {
 }
 
 #img_venue {
-  width: 75% !important;
+  width: 75%;
   margin-bottom: 0 !important;
   animation: infoAnimKeyframes 1s ease-in 1.9s both;
 }
