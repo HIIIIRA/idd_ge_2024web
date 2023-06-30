@@ -16,7 +16,7 @@ body {
   display: flex;
   top: 0;
   overflow: hidden;
-  position: relative;
+  position: fixed;
   @include res.res(sp) {
     flex-direction: column;
   }
@@ -227,32 +227,43 @@ body {
   }
 
   #twitter {
-    background-color: setting.$white;
+    background-color: setting.$black;
+    width: 50px;
+    height: 50px;
+
+    img {
+      position: relative;
+      width: 52px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   #instagram {
     background-color: setting.$white;
     margin-left: 20px;
+    width: 52px;
+    height: 52px;
 
     @include res.res(sp) {
       margin-top: 16px;
       margin-left: 0;
     }
+
+    img {
+      position: relative;
+      width: 29px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 
 .sns_round {
-  width: 52px;
-  height: 52px;
+  
   border-radius: 50%;
-
-  img {
-    position: relative;
-    width: 29px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 }
 
 /*--------------*/

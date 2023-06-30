@@ -10,7 +10,6 @@
   font-family: "IBM Plex Mono", monospace;
   font-size: 10px;
   line-height: 10px;
-  letter-spacing: 1em;
 
   @include anim.infoAnim(-1);
 
@@ -24,6 +23,25 @@
     position: absolute;
   }
 
+  .back{
+    z-index: 100;
+    opacity: 1;
+    transition: all 1s;
+  }
+
+  .glyph{
+    opacity: 1;
+    transition: all 1s;
+    white-space: nowrap;
+  }
+
+  .hide{
+    visibility: hidden;
+    opacity: 0;
+  }
+
+
+
   #back_F {
     top: 0;
     left: 0;
@@ -32,134 +50,105 @@
 
   #back_r {
     top: 0;
-    right: 0;
+    right: 1%;
     width: 50%;
   }
 
   #back_o {
     top: 37%;
-    left: 0;
+    left: 0.5%;
     width: 46%;
+    @include res.res(sp) {
+      top: 44vw;
+    }
   }
 
   #back_m {
-    top: 39%;
+    top: 37.5%;
     right: 0;
     width: 48%;
+    @include res.res(sp) {
+      top: 45.5vw;
+    }
   }
 
   #back_T {
     top: 28.7%;
     left: 0;
     width: 23%;
+    @include res.res(sp) {
+      top: 34.5vw;
+    }
   }
 
-  #mask_F {
+  #img_F {
+    position: absolute;
     width: 66%;
-    height: 35%;
-    mask-image: url(../img/mask_F.svg);
-    mask-repeat: no-repeat;
-    mask-size: 100%;
-    -webkit-mask-image: url(../img/mask_F.svg);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100%;
-
-    #img_F {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: top left;
-      background-color: #efefef;
-    }
-  }
-
-  #mask_r {
-    position: absolute;
     top: 0;
-    right: 0;
-    width: 50%;
-    height: 67%;
-    mask-image: url(../img/mask_r.svg);
-    mask-repeat: no-repeat;
-    mask-size: 100%;
-    -webkit-mask-image: url(../img/mask_r.svg);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100%;
-
-    #img_r {
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform-origin: top right;
-      background-color: #efefef;
-    }
-  }
-
-  #mask_o {
-    position: absolute;
-    top: 37%;
     left: 0;
+    transform-origin: top left;
+    
+  }
+
+  #img_r {
+    position: absolute;
+    width: 50%;
+    top: 0;
+    right: 1%;
+    transform-origin: top left;
+    
+  }
+
+
+  #img_o {
+    position: absolute;
     width: 46%;
-    height: 45%;
-    mask-image: url(../img/mask_o.svg);
-    mask-repeat: no-repeat;
-    mask-size: 100%;
-    -webkit-mask-image: url(../img/mask_o.svg);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100%;
-
-    #img_o {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: top left;
-      background-color: #efefef;
+    top: 37%;
+    left: 0.5%;
+    transform-origin: top left;
+    @include res.res(sp) {
+      top: 44vw;
     }
   }
 
-  #mask_m {
+  #img_m {
     position: absolute;
-    top: 39%;
-    right: 0;
     width: 48%;
-    height: 69%;
-    mask-image: url(../img/mask_m.svg);
-    mask-repeat: no-repeat;
-    mask-size: 100%;
-    -webkit-mask-image: url(../img/mask_m.svg);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100%;
-
-    #img_m {
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform-origin: top right;
-      background-color: #efefef;
+    top: 37.5%;
+    right: 0;
+    transform-origin: top left;
+    @include res.res(sp) {
+      top: 45.5vw;
     }
   }
 
-  #mask_T {
+  #img_T {
     position: absolute;
+    width: 23%;
     top: 28.7%;
     left: 0;
-    width: 23%;
-    height: 32%;
-    mask-image: url(../img/mask_T.svg);
-    mask-repeat: no-repeat;
-    mask-size: 100%;
-    -webkit-mask-image: url(../img/mask_T.svg);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100%;
-
-    #img_T {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: top left;
-      background-color: #efefef;
+    transform-origin: top left;
+    @include res.res(sp) {
+      top: 34.5vw;
     }
   }
+
+  .cursor::after {
+    content: "|";
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes blink {
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  
 }
 
 /*------------*/

@@ -1,83 +1,45 @@
-var aspect = [];
 var Glyph;
-var pixelSize_PC = 200;
-var pixelSize_SP = 100;
-var pixelSize_rate;
-var mobile = false;
-let allowLoop = false;
+var aspect = [];
+var pixelSize = 100;
 
 $(document).ready(function () {
   Glyph = document.getElementsByClassName("glyph");
-  pixelSize_rate = Math.pow(pixelSize_PC, 2) / Math.pow(pixelSize_SP, 2);
-  console.log(pixelSize_rate);
-  if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-    mobile = true;
-    createPixel(pixelSize_SP).then(animation);
-  } else {
-    createPixel(pixelSize_PC).then(animation);
-  }
+  SetUp().then(animation);
 });
 
-function createPixel(s) {
+function SetUp() {
+  var codeAll = loadText("./assets/text/code.txt");
+  var code = codeAll.match(RegExp(`.{1,${Math.ceil(codeAll.length / 5)}}`, "g"));
+
   return new Promise(function (resolve) {
     var imgPromises = [];
 
-    for (var i = 0; i < Glyph.length; i++) {
+    $(Glyph).each(function (i) {
       imgPromises.push(
         loadImage(`./assets/img/${Glyph[i].id.replace("img_", "")}.png`)
       );
-    }
+    })
 
     Promise.all(imgPromises).then(function (images) {
-      var t = new Array(Glyph.length).fill("");
-      var lorem =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fermentum libero sed ante molestie, et tincidunt libero ultrices. Phasellus sed placerat nunc, a condimentum nunc. Proin lobortis tincidunt accumsan. Vivamus vitae enim neque. Curabitur ante felis, sodales at enim id, commodo fermentum sapien. Donec faucibus risus vel ante ultricies commodo. Curabitur commodo quam quis enim porta auctor. Phasellus imperdiet imperdiet condimentum. Aliquam at magna orci. Quisque eget purus vel augue iaculis blandit at sed ex. In ultricies tincidunt lorem. Quisque vel massa placerat, maximus nulla dapibus, ullamcorper mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a sollicitudin velit, non cursus lectus. Nulla vehicula cursus justo";
-      var Count;
-
-      $(Glyph).each(function (i) {
-        var image = images[i];
-        aspect[i] = image.height / image.width;
-        var [w, h] = getGlyphSize(s, i);
-        var ctx = createCanvas(w, h);
-        ctx.drawImage(image, 0, 0, w, h);
-
-        var imageData = ctx.getImageData(0, 0, w, h);
-        var data = imageData.data;
-        Count = 0;
-
-        for (let y = 0; y < h; y++) {
-          let line = "";
-          for (let x = 0; x < w; x++) {
-            var index = (x + y * w) * 4;
-            var alpha = data[index + 3];
-            if (alpha != 0 && lorem[Count] != " ") {
-              line += lorem[Count];
-              Count++;
-              if (Count >= lorem.length) {
-                Count = 0;
-              }
-            } else if (alpha != 0 && lorem[Count] == " ") {
-              line += "凹";
-              Count++;
-              if (Count >= lorem.length) {
-                Count = 0;
-              }
-            } else {
-              line += "凹";
-            }
-          }
-          t[i] += line + "凸";
-        }
-
-        $(Glyph[i]).html(t[i]);
-        $(Glyph[i]).fadeOut(0);
-      });
+      createPixelData(images, code);
       resolve();
     });
   });
 }
 
-function loadImage(src) {
+const loadText = function(src) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', src, false);
+  xhr.send();
+
+  if (xhr.status === 200) {
+    return xhr.responseText;
+  } else {
+    throw new Error('Failed to load text file: ' + src);
+  }
+}
+
+const loadImage = function(src) {
   return new Promise(function (resolve, reject) {
     var img = new Image();
     img.onload = function () {
@@ -98,119 +60,187 @@ const createCanvas = function (w, h) {
   return ctx;
 };
 
+const createPixelData = function(images,code){
+  $(Glyph).each(function (i) {
+    var image = images[i];
+    aspect[i] = image.height / image.width;
+    var [w, h] = getGlyphSize(pixelSize, i);
+    var ctx = createCanvas(w, h);
+    ctx.drawImage(image, 0, 0, w, h);
+
+    var imageData = ctx.getImageData(0, 0, w, h).data;
+    var splitCode = code[i];
+    var t = "";
+    var Count = 0;
+
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        var index = (x + y * w) * 4;
+        var alpha = imageData[index + 3];
+        if (alpha != 0) {
+          if(splitCode[Count] == " "){
+            t += "凹"; 
+          }else{
+            t += splitCode[Count]; 
+          }
+          Count++;
+        }else {
+          t += "凹";
+        }
+      }
+      t += "凸";
+    }
+
+    $(Glyph[i]).html(t);
+    $(Glyph[i]).fadeIn(0);
+  });
+}
+
 function animation() {
   var fps = 0;
   var frameCount = 0;
   var startTime, endTime;
   startTime = new Date().getTime();
 
-  var string = [];
-  var tex = new Array(Glyph.length).fill("");
-  var c = new Array(Glyph.length).fill(0);
+  var spritText = [];
+  var spritText2 = [];
+  var htmlText = new Array(Glyph.length).fill("");
+  var originText = new Array(Glyph.length).fill("");
+  var Count = new Array(Glyph.length).fill(0);
   var fin = new Array(Glyph.length).fill(false);
-  var sp = 50;
+  var [appSp, disSp] = [3, 15];
+  var animationState = "appear";
+  var r_length = $(Glyph[1]).html().length;
+  var startDelay = 100;
 
-  if (mobile) {
-    sp = Math.round(sp / pixelSize_rate);
-  }
-
-  var reg = new RegExp(`.{1,${sp}}`, "g");
-  var regex = new RegExp("[^凸]", "g");
-
-  var str = [];
-  var string2 = [];
-  var origin = [];
-
-  for (let i = 0; i < Glyph.length; i++) {
-    origin[i] = $(Glyph[i]).html();
-    string[i] = origin[i].match(reg);
+  $(Glyph).each(function (i) {
+    originText[i] = $(Glyph[i]).html();
+   
+    var sp2 = Math.floor(appSp * originText[i].length / r_length + 1);
+    spritText[i] = originText[i].match(RegExp(`.{1,${sp2}}`, "g"));
 
     $(Glyph[i]).html("");
     $(Glyph[i]).fadeIn(0);
+  })
+  
+  function animationLoop(){
+    switch(animationState){
+      case "appear":
+        appear();
+        break;
+      case "disappear":
+        disappear();
+        break;
+      case "interval":
+        interval();
+        break;
+    }
+    
+    fpsCounter();
+    requestAnimationFrame(animationLoop);
   }
 
-  function appearLoop() {
+  function appear() {
     $(Glyph).each(function (i) {
       if (i == 0) {
-      } else if (c[i - 1] < string[i].length / 4) {
-        c[i] = 0;
+      } else if (Count[i - 1] < startDelay) {
+        Count[i] = 0;
         return true;
       }
 
-      if (string[i].length <= [c[i]]) {
-        $("#back_" + Glyph[i].id.replace("img_", "")).css({ display: "none" });
+      if(Count[i] > 0){
+        $(this).addClass("cursor");
+      }
+
+      if (spritText[i].length <= [Count[i]]) {
+        $(this).removeClass("cursor");
+        setHTMLText(i);
         fin[i] = true;
         return true;
       }
 
-      var addTex = string[i][c[i]];
-      addTex = addTex.replace(/凹/g, "&nbsp;").replace(/凸/g, "<br>");
-      tex[i] += addTex;
-      //tex[i] += str[i][c[i]];
 
-      $(Glyph[i]).html(tex[i]);
+      var addText = spritText[i][Count[i]];
+      htmlText[i] += addText; 
 
-      c[i]++;
+      setHTMLText(i);
+
+      Count[i]++;
     });
 
-    frameCount++;
-    endTime = new Date().getTime();
-    if (endTime - startTime >= 1000) {
-      fps = frameCount;
-      frameCount = 0;
-      startTime = new Date().getTime();
-      let animationFPS = document.getElementById("fps");
-      animationFPS.innerHTML = "fps : " + fps;
-    }
+    if (fin.every((i) => i == true)) {
+      $(Glyph).each(function (i) {
+        $("#back_" + Glyph[i].id.replace("img_", "")).removeClass("hide",1000,"ease");
+        $(Glyph[i]).addClass("hide");
 
-    if (!fin.every((i) => i == true)) {
-      requestAnimationFrame(appearLoop);
-    } else {
-      for (let i = 0; i < Glyph.length; i++) {
-        str[i] = origin[i].replace(/&nbsp;/g, "凹").replace(/<br>/g, "凸");
-        string2[i] = str[i].match(reg);
-        c[i] = 0;
-
-        //$(Glyph[i]).html("");
-        //$(Glyph[i]).fadeIn(0);
-      }
-      if (allowLoop) {
-        disappearLoop();
-      }
-
-      // let animationFPS = document.getElementById("fps");
-      // animationFPS.innerHTML = "all finish";
+        htmlText[i] = originText[i].replace(/&nbsp;/g, "凹").replace(/<br>/g, "凸");
+        spritText[i] = htmlText[i].match(RegExp(`.{1,${disSp}}`, "g"));
+        spritText2[i] = htmlText[i].split("");
+        Count[i] = 0;
+      })
+      animationState = "interval";
     }
   }
 
-  function disappearLoop() {
-    $(Glyph).each(function (i) {
-      if (i == 0) {
-      } else if (c[i - 1] < string2[i].length / 4) {
-        c[i] = 0;
-        return true;
-      }
+  const setHTMLText = function(i){
+    var modifiedText = removeSpace(htmlText[i]);
+    $(Glyph[i]).html(modifiedText.replace(/凹/g, "&nbsp;").replace(/凸/g, "<br>"));
+  }
 
-      if (string2[i].length <= c[i]) {
-        //$("#back_" + Glyph[i].id.replace("img_", "")).css({"display":"none"});
+  const removeSpace = function(str) {
+    var pattern = /(.)(\1)+$/;
+    if(str.slice(-1) == "凹" && str.charAt(str.length - 2) != "凹"){
+      str = str.slice(0, -1);
+    }
+    str = str.replace(pattern, "");
+    if(str.slice(-1) == "凸"){
+      str = str.slice(0, -1);
+    }
+    
+    str = str.replace(pattern, "");
+    return str;
+  }
+
+  function interval(){
+    setTimeout(() => { 
+      $(Glyph).each(function (i) {
+        $("#back_" + Glyph[i].id.replace("img_", "")).addClass("hide");
+        $(Glyph[i]).removeClass("hide");
+      });
+      setTimeout(() => { 
+        if(animationState == "interval"){
+          animationState = "disappear";
+        }
+      },1000)
+    }, 30000)  
+  }
+
+  function disappear() {
+    $(Glyph).each(function (i) {
+      if (spritText[i].length <= Count[i]) {
         fin[i] = false;
         return true;
       }
 
-      var newText = string2[i][c[i]].replace(regex, "凹");
-      str[i] =
-        str[i].substring(0, c[i] * sp) +
-        newText +
-        str[i].substring(c[i] * sp + sp);
-      //tex[i] += addTex;
-      //tex[i] += str[i][c[i]];
-      var t = str[i];
+      var newText = spritText[i][Count[i]].replace(RegExp("[^凸]", "g"), "凹");
+      htmlText[i] = htmlText[i].substring(0, Count[i] * disSp) + newText + htmlText[i].substring((Count[i] * disSp) + disSp);
+      $(Glyph[i]).html(htmlText[i].replace(/凹/g, "&nbsp;").replace(/凸/g, "<br>"));
 
-      $(Glyph[i]).html(t.replace(/凹/g, "&nbsp;").replace(/凸/g, "<br>"));
-
-      c[i]++;
+      Count[i]++;
     });
 
+    if (fin.every((i) => i == false)) {
+      $(Glyph).each(function (i) {
+        var sp2 = Math.floor(appSp * originText[i].length / r_length + 1);
+        spritText[i] = originText[i].match(RegExp(`.{1,${sp2}}`, "g"));
+        Count[i] = 0;
+        htmlText[i] = "";
+      })
+      animationState = "appear";
+    }
+  }
+
+  function fpsCounter(){
     frameCount++;
     endTime = new Date().getTime();
     if (endTime - startTime >= 1000) {
@@ -219,41 +249,23 @@ function animation() {
       startTime = new Date().getTime();
       let animationFPS = document.getElementById("fps");
       animationFPS.innerHTML = "fps : " + fps;
-    }
-
-    if (!fin.every((i) => i == false)) {
-      requestAnimationFrame(disappearLoop);
-    } else {
-      for (let i = 0; i < Glyph.length; i++) {
-        string[i] = origin[i].match(reg);
-        c[i] = 0;
-        tex[i] = "";
-
-        //$(Glyph[i]).html("");
-        //$(Glyph[i]).fadeIn(0);
-      }
-      appearLoop();
     }
   }
 
   $(this)
     .delay(4000)
     .queue(function () {
-      appearLoop();
-    });
+      animationLoop();
+  });
 }
 
 $(window).resize(function () {
-  if (mobile) {
-    ReSize(pixelSize_SP);
-  } else {
-    ReSize(pixelSize_PC);
-  }
+  ReSize();
 });
 
-function ReSize(s) {
+function ReSize() {
   $(Glyph).each(function (i) {
-    getGlyphSize(s, i);
+    getGlyphSize(pixelSize, i);
   });
 }
 
@@ -263,11 +275,9 @@ const getGlyphSize = function (s, i) {
   var [fontW, fontH] = getFontSize();
   var w = Math.round(sizeW * s);
   var h = Math.round((w * aspect[i] * fontW) / fontH);
-  //var ad = Math.pow((1 - (1 / s)), 2);
-  var ad = 1;
 
-  var scaleW = ((sizeW * titleWidth) / (fontW * w)) * 100 * ad;
-  var scaleH = ((sizeH * titleWidth) / (fontH * h)) * 100 * ad;
+  var scaleW = ((sizeW * titleWidth) / (fontW * w)) * 100;
+  var scaleH = ((sizeH * titleWidth) / (fontH * h)) * 100;
 
   $(Glyph[i]).css({ transform: `scale(${scaleW}%,${scaleH}%)` });
 
@@ -295,7 +305,6 @@ const getFontSize = function () {
   var width = span.clientWidth;
 
   span.parentElement.removeChild(span);
-  console.log(width + ":" + height);
 
   return [width, height];
 };
@@ -324,4 +333,4 @@ const size = function (id) {
   }
 
   return [w, h];
-};
+}
