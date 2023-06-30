@@ -527,18 +527,18 @@ body {
   width: 52px;
   height: 52px;
 }
-@media screen and (max-width: 850px) {
-  #sns_icon #instagram {
-    margin-top: 16px;
-    margin-left: 0;
-  }
-}
 #sns_icon #instagram img {
   position: relative;
   width: 29px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media screen and (max-width: 850px) {
+  #sns_icon #instagram {
+    margin-top: 16px;
+    margin-left: 0;
+  }
 }
 
 .sns_round {
@@ -561,12 +561,13 @@ body {
 #title_frame .back {
   z-index: 100;
   opacity: 1;
-  transition: all 1s;
 }
 #title_frame .glyph {
   opacity: 1;
-  transition: all 1s;
   white-space: nowrap;
+}
+#title_frame .fade {
+  transition: all 1s;
 }
 #title_frame .hide {
   visibility: hidden;

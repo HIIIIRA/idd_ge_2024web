@@ -16,7 +16,7 @@ function SetUp() {
 
     $(Glyph).each(function (i) {
       imgPromises.push(
-        loadImage(`./assets/img/${Glyph[i].id.replace("img_", "")}.png`)
+        loadImage(`./assets/img/${this.id.replace("img_", "")}.png`)
       );
     })
 
@@ -32,7 +32,7 @@ const loadText = function(src) {
   xhr.open('GET', src, false);
   xhr.send();
 
-  if (xhr.status === 200) {
+  if (xhr.status == 200) {
     return xhr.responseText;
   } else {
     throw new Error('Failed to load text file: ' + src);
@@ -78,7 +78,7 @@ const createPixelData = function(images,code){
         var index = (x + y * w) * 4;
         var alpha = imageData[index + 3];
         if (alpha != 0) {
-          if(splitCode[Count] == " "){
+          if(splitCode[Count] === " "){
             t += "凹"; 
           }else{
             t += splitCode[Count]; 
@@ -91,8 +91,8 @@ const createPixelData = function(images,code){
       t += "凸";
     }
 
-    $(Glyph[i]).html(t);
-    $(Glyph[i]).fadeIn(0);
+    $(this).html(t);
+    $(this).fadeIn(0);
   });
 }
 
@@ -112,15 +112,20 @@ function animation() {
   var animationState = "appear";
   var r_length = $(Glyph[1]).html().length;
   var startDelay = 100;
+  var stopTime = new Array(Glyph.length).fill(0);
+  var shuffleTime = new Array(Glyph.length).fill(0);
+  var [stopTimeLength, shuffleTimeLength] = [1000, 200];
+  var intervalStartTime = 0;
+  var intervalLength = 10000;
 
   $(Glyph).each(function (i) {
-    originText[i] = $(Glyph[i]).html();
+    originText[i] = $(this).html();
    
-    var sp2 = Math.floor(appSp * originText[i].length / r_length + 1);
-    spritText[i] = originText[i].match(RegExp(`.{1,${sp2}}`, "g"));
+    var sp = Math.floor(appSp * originText[i].length / r_length + 1);
+    spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
 
-    $(Glyph[i]).html("");
-    $(Glyph[i]).fadeIn(0);
+    $(this).html("");
+    $(this).fadeIn(0);
   })
   
   function animationLoop(){
@@ -142,7 +147,7 @@ function animation() {
 
   function appear() {
     $(Glyph).each(function (i) {
-      if (i == 0) {
+      if (i === 0) {
       } else if (Count[i - 1] < startDelay) {
         Count[i] = 0;
         return true;
@@ -152,32 +157,39 @@ function animation() {
         $(this).addClass("cursor");
       }
 
+      var [eff1,eff2] = randomEffects(i);
+      if(eff1){
+        return true;
+      }
+
       if (spritText[i].length <= [Count[i]]) {
         $(this).removeClass("cursor");
-        setHTMLText(i);
         fin[i] = true;
         return true;
       }
 
-
       var addText = spritText[i][Count[i]];
       htmlText[i] += addText; 
-
-      setHTMLText(i);
+      
+      if(!eff2){
+        setHTMLText(i);
+      }
 
       Count[i]++;
+      
     });
-
-    if (fin.every((i) => i == true)) {
+    
+    if (fin.every((j) => j === true)) {
       $(Glyph).each(function (i) {
-        $("#back_" + Glyph[i].id.replace("img_", "")).removeClass("hide",1000,"ease");
-        $(Glyph[i]).addClass("hide");
+        $("#back_" + this.id.replace("img_", "")).removeClass("hide");
+        $(this).addClass("hide");
 
         htmlText[i] = originText[i].replace(/&nbsp;/g, "凹").replace(/<br>/g, "凸");
         spritText[i] = htmlText[i].match(RegExp(`.{1,${disSp}}`, "g"));
         spritText2[i] = htmlText[i].split("");
         Count[i] = 0;
       })
+      intervalStartTime = new Date().getTime();
       animationState = "interval";
     }
   }
@@ -189,11 +201,11 @@ function animation() {
 
   const removeSpace = function(str) {
     var pattern = /(.)(\1)+$/;
-    if(str.slice(-1) == "凹" && str.charAt(str.length - 2) != "凹"){
+    if(str.slice(-1) === "凹" && str.charAt(str.length - 2) != "凹"){
       str = str.slice(0, -1);
     }
     str = str.replace(pattern, "");
-    if(str.slice(-1) == "凸"){
+    if(str.slice(-1) === "凸"){
       str = str.slice(0, -1);
     }
     
@@ -201,38 +213,114 @@ function animation() {
     return str;
   }
 
+  const randomEffects = function(i){
+    var random = Math.random();
+    var t = new Date().getTime();
+    var playStop = stopTime[i] != 0;
+    var playShuffle = shuffleTime[i] != 0; 
+
+    if(random < 0.01 && !playStop && !playShuffle){
+      if(i === 0){
+        stopTime[i] = new Date().getTime();
+      }else if(fin[i - 1] === false){
+        stopTime[i] = new Date().getTime();
+      }
+    }
+
+    if(stopTime[i] + stopTimeLength < t){
+      stopTime[i] = 0
+    }
+
+    if(random > 0.998 && !playShuffle && !playStop){
+        shuffleTime[i] = new Date().getTime();
+    }
+
+    if(shuffleTime[i] + shuffleTimeLength > t){
+      var temporary = htmlText[i];
+      htmlText[i] = replaceRandomChar(htmlText[i]);
+      setHTMLText(i);
+      htmlText[i] = temporary;
+    }else{
+      shuffleTime[i] = 0
+      setHTMLText(i);
+    }
+
+    return [playStop , playShuffle];
+  }
+
+  const replaceRandomChar = function(text) {
+    var characters = text.split("");
+    var character = "█▓▒░&$#@---";
+  
+    var replacedChar = characters.map(function (char) {
+      if (char === "凸" || char === "凹") {
+        return char;
+      } else {
+        var randomChar = Math.floor(Math.random() * (character.length - 1)) + 1;
+        return character[randomChar];
+      }
+    });
+
+    return replacedChar.join('');
+  }
+
   function interval(){
-    setTimeout(() => { 
-      $(Glyph).each(function (i) {
-        $("#back_" + Glyph[i].id.replace("img_", "")).addClass("hide");
-        $(Glyph[i]).removeClass("hide");
-      });
+    var t = new Date().getTime();
+    $(Glyph).each(function (i) {
+
       setTimeout(() => { 
-        if(animationState == "interval"){
-          animationState = "disappear";
+        $("#back_" + this.id.replace("img_", "")).addClass("fade");
+        $(this).addClass("fade");
+        setTimeout(() => {
+          $("#back_" + this.id.replace("img_", "")).addClass("hide");
+          $(this).removeClass("hide");
+          setTimeout(() => {
+            if(animationState === "interval"){
+              animationState = "disappear";
+            }
+          },1000)
+        },100)   
+      }, intervalLength)  
+
+      if(intervalStartTime + intervalLength - 1000 > t && intervalStartTime + 1000 < t){
+        var [eff1,eff2] = randomEffects(i);
+        if(eff2){
+          $("#back_" + this.id.replace("img_", "")).removeClass("fade").addClass("hide");
+          $(this).removeClass("fade").removeClass("hide");
+          setTimeout(() => {
+            $("#back_" + this.id.replace("img_", "")).removeClass("hide");
+            $(this).addClass("hide");
+          },shuffleTimeLength)
         }
-      },1000)
-    }, 30000)  
+      }
+    })  
   }
 
   function disappear() {
     $(Glyph).each(function (i) {
+
       if (spritText[i].length <= Count[i]) {
         fin[i] = false;
         return true;
       }
 
+      var CountChar = Count[i] * disSp;
+      for(let j = 0; j < 50; j ++){
+        var random = Math.floor(Math.random() * ((spritText2[i].length - CountChar) / 3));
+        var newText2 = spritText2[i][CountChar + random].replace(RegExp("[^凸]", "g"), "凹");
+        htmlText[i] = htmlText[i].substring(0,(CountChar + random)) + newText2 + htmlText[i].substring(CountChar + random + 1);
+      }
       var newText = spritText[i][Count[i]].replace(RegExp("[^凸]", "g"), "凹");
       htmlText[i] = htmlText[i].substring(0, Count[i] * disSp) + newText + htmlText[i].substring((Count[i] * disSp) + disSp);
-      $(Glyph[i]).html(htmlText[i].replace(/凹/g, "&nbsp;").replace(/凸/g, "<br>"));
+      $(this).html(htmlText[i].replace(/凹/g, "&nbsp;").replace(/凸/g, "<br>"));
 
       Count[i]++;
     });
 
-    if (fin.every((i) => i == false)) {
+    if (fin.every((j) => j === false)) {
       $(Glyph).each(function (i) {
-        var sp2 = Math.floor(appSp * originText[i].length / r_length + 1);
-        spritText[i] = originText[i].match(RegExp(`.{1,${sp2}}`, "g"));
+        var sp = Math.floor(appSp * originText[i].length / r_length + 1);
+        spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
         Count[i] = 0;
         htmlText[i] = "";
       })

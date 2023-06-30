@@ -26,18 +26,21 @@
   .back{
     z-index: 100;
     opacity: 1;
-    transition: all 1s;
   }
 
   .glyph{
-    opacity: 1;
-    transition: all 1s;
+   opacity: 1;
     white-space: nowrap;
+  }
+
+  .fade{
+    transition: all 1s;
   }
 
   .hide{
     visibility: hidden;
     opacity: 0;
+    
   }
 
 
@@ -158,3 +161,4 @@
   top: 0;
   left: 0;
 }
+

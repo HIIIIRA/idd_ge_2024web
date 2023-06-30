@@ -230,7 +230,6 @@ body {
     background-color: setting.$black;
     width: 50px;
     height: 50px;
-
     img {
       position: relative;
       width: 52px;
@@ -246,11 +245,6 @@ body {
     width: 52px;
     height: 52px;
 
-    @include res.res(sp) {
-      margin-top: 16px;
-      margin-left: 0;
-    }
-
     img {
       position: relative;
       width: 29px;
@@ -258,12 +252,19 @@ body {
       left: 50%;
       transform: translate(-50%, -50%);
     }
+
+    @include res.res(sp) {
+      margin-top: 16px;
+      margin-left: 0;
+    }
   }
 }
 
 .sns_round {
   
   border-radius: 50%;
+
+  
 }
 
 /*--------------*/
