@@ -117,6 +117,7 @@ function animation() {
   var [stopTimeLength, shuffleTimeLength] = [1000, 200];
   var intervalStartTime = 0;
   var intervalLength = 10000;
+  var effInterval = new Array(Glyph.length).fill(false);
 
   $(Glyph).each(function (i) {
     originText[i] = $(this).html();
@@ -157,12 +158,14 @@ function animation() {
         $(this).addClass("cursor");
       }
 
-      var [eff1,eff2] = randomEffects(i);
+      if(spritText.every((j) => j.length >= Count[i] + 50)){
+        var [eff1,eff2] = randomEffects(i);
+      } 
       if(eff1){
         return true;
       }
 
-      if (spritText[i].length <= [Count[i]]) {
+      if (spritText[i].length <= Count[i]) {
         $(this).removeClass("cursor");
         fin[i] = true;
         return true;
@@ -242,7 +245,9 @@ function animation() {
       htmlText[i] = temporary;
     }else{
       shuffleTime[i] = 0
-      setHTMLText(i);
+      if(fin[i] === true ){
+        setHTMLText(i);
+      }   
     }
 
     return [playStop , playShuffle];
@@ -267,30 +272,32 @@ function animation() {
   function interval(){
     var t = new Date().getTime();
     $(Glyph).each(function (i) {
-
-      setTimeout(() => { 
+      if(intervalStartTime + intervalLength + 1100 <= t){
+        if(animationState === "interval"){
+          animationState = "disappear";
+        }
+      }else if(intervalStartTime + intervalLength + 100 <= t && $(this).hasClass("hide")){
+        setHTMLText(i);
+        $("#back_" + this.id.replace("img_", "")).addClass("hide");
+        $(this).removeClass("hide");
+      }else if(intervalStartTime + intervalLength <= t && !$(this).hasClass("fade")){
         $("#back_" + this.id.replace("img_", "")).addClass("fade");
         $(this).addClass("fade");
-        setTimeout(() => {
-          $("#back_" + this.id.replace("img_", "")).addClass("hide");
-          $(this).removeClass("hide");
-          setTimeout(() => {
-            if(animationState === "interval"){
-              animationState = "disappear";
-            }
-          },1000)
-        },100)   
-      }, intervalLength)  
-
+      }
+      
       if(intervalStartTime + intervalLength - 1000 > t && intervalStartTime + 1000 < t){
         var [eff1,eff2] = randomEffects(i);
         if(eff2){
           $("#back_" + this.id.replace("img_", "")).removeClass("fade").addClass("hide");
           $(this).removeClass("fade").removeClass("hide");
-          setTimeout(() => {
-            $("#back_" + this.id.replace("img_", "")).removeClass("hide");
-            $(this).addClass("hide");
-          },shuffleTimeLength)
+          if(!effInterval[i]){
+            effInterval[i] = true;
+            setTimeout(() => {
+              $("#back_" + this.id.replace("img_", "")).removeClass("hide");
+              $(this).addClass("hide");
+              effInterval[i] = false;
+            },shuffleTimeLength)
+          }
         }
       }
     })  
@@ -307,9 +314,10 @@ function animation() {
       var CountChar = Count[i] * disSp;
       for(let j = 0; j < 50; j ++){
         var random = Math.floor(Math.random() * ((spritText2[i].length - CountChar) / 3));
-        var newText2 = spritText2[i][CountChar + random].replace(RegExp("[^凸]", "g"), "凹");
-        htmlText[i] = htmlText[i].substring(0,(CountChar + random)) + newText2 + htmlText[i].substring(CountChar + random + 1);
+        var newTextRandom = spritText2[i][CountChar + random].replace(RegExp("[^凸]", "g"), "凹");
+        htmlText[i] = htmlText[i].substring(0,(CountChar + random)) + newTextRandom + htmlText[i].substring(CountChar + random + 1);
       }
+    
       var newText = spritText[i][Count[i]].replace(RegExp("[^凸]", "g"), "凹");
       htmlText[i] = htmlText[i].substring(0, Count[i] * disSp) + newText + htmlText[i].substring((Count[i] * disSp) + disSp);
       $(this).html(htmlText[i].replace(/凹/g, "&nbsp;").replace(/凸/g, "<br>"));
