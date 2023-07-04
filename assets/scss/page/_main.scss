@@ -255,16 +255,6 @@ body {
   #instagram {
     background-color: setting.$white;
     margin-left: 20px;
-    width: 52px;
-    height: 52px;
-
-    img {
-      position: relative;
-      width: 29px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
 
     @include res.res(sp) {
       margin-top: 16px;
@@ -274,6 +264,8 @@ body {
 }
 
 .sns_round {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   &.instagram {
     img {

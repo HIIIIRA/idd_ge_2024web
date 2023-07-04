@@ -539,15 +539,6 @@ body {
 #sns_icon #instagram {
   background-color: #ffffff;
   margin-left: 20px;
-  width: 52px;
-  height: 52px;
-}
-#sns_icon #instagram img {
-  position: relative;
-  width: 29px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 @media screen and (max-width: 850px) {
   #sns_icon #instagram {
@@ -557,6 +548,8 @@ body {
 }
 
 .sns_round {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
 }
 .sns_round.instagram img {
