@@ -23,27 +23,24 @@
     position: absolute;
   }
 
-  .back{
-    z-index: 100;
+  .back {
+    z-index: 3;
     opacity: 1;
   }
 
-  .glyph{
-   opacity: 1;
+  .glyph {
+    opacity: 1;
     white-space: nowrap;
   }
 
-  .fade{
+  .fade {
     transition: all 1s;
   }
 
-  .hide{
+  .hide {
     visibility: hidden;
     opacity: 0;
-    
   }
-
-
 
   #back_F {
     top: 0;
@@ -90,7 +87,6 @@
     top: 0;
     left: 0;
     transform-origin: top left;
-    
   }
 
   #img_r {
@@ -99,9 +95,7 @@
     top: 0;
     right: 1%;
     transform-origin: top left;
-    
   }
-
 
   #img_o {
     position: absolute;
@@ -144,14 +138,13 @@
   }
 
   @keyframes blink {
-      from {
-          opacity: 0;
-      }
-      to {
-          opacity: 1;
-      }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-  
 }
 
 /*------------*/

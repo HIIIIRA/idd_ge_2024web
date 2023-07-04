@@ -71,6 +71,8 @@ time,
 mark,
 audio,
 video {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   letter-spacing: 0;
   vertical-align: baseline;
@@ -286,19 +288,28 @@ body {
   color: #333;
   margin: auto;
   height: 100%;
+  overflow: hidden;
 }
 
 /*全体包括*/
 #wrapper {
-  width: 100vw;
   height: 100%;
-  display: flex;
-  top: 0;
-  overflow: hidden;
+  width: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
+}
+#wrapper .wrapper-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 5%;
+  flex-direction: row-reverse;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 @media screen and (max-width: 850px) {
-  #wrapper {
+  #wrapper .wrapper-inner {
     flex-direction: column;
   }
 }
@@ -320,11 +331,20 @@ body {
 
 /*---コンテナ---*/
 #container_info {
-  width: 35%;
+  width: 400px;
   height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
   padding-top: 24px;
   padding-left: 24px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   z-index: 5;
+  background: #efefef;
+  background: linear-gradient(90deg, #efefef 85%, rgba(255, 255, 255, 0) 100%);
 }
 @media screen and (max-width: 850px) {
   #container_info {
@@ -333,9 +353,9 @@ body {
     position: fixed;
     left: 0;
     bottom: 0;
+    top: auto;
     padding: 0 4.3vw 4.8vw 4.3vw;
     margin: 0;
-    display: flex;
     flex-direction: row-reverse;
     background: #efefef;
     background: linear-gradient(0deg, #efefef 80%, rgba(255, 255, 255, 0) 100%);
@@ -343,17 +363,15 @@ body {
 }
 
 #container_title {
-  width: 65vw;
+  width: 65%;
   height: 78.3vw;
-  position: absolute;
-  right: 0;
+  margin-left: auto;
 }
 @media screen and (max-width: 850px) {
   #container_title {
     width: 100vw;
     height: 120.4vw;
     position: relative;
-    top: 0;
     order: -1;
   }
 }
@@ -376,111 +394,63 @@ body {
 /*--------------*/
 /*---画面左---*/
 #info_top {
-  margin-top: auto;
+  width: 350px;
 }
 @media screen and (max-width: 850px) {
   #info_top {
+    margin-top: auto;
+    height: 90%;
     width: 45%;
   }
 }
-
-#info_bottom {
-  width: 19vw;
-  margin-bottom: 24px;
-  margin-left: 24px;
-}
-@media screen and (min-width: 851px) {
-  #info_bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-  }
-}
-@media screen and (max-width: 850px) {
-  #info_bottom {
-    width: 55%;
-    height: auto;
-    margin: 0;
-  }
-}
-
-#info_bottom_hanko {
-  display: flex;
-  gap: 10px;
-  animation: infoAnimKeyframes 1s ease-in 2.5s both;
-  height: 5vw;
-}
-@media screen and (max-width: 850px) {
-  #info_bottom_hanko {
-    height: 10.6vw;
-  }
-}
-#info_bottom_hanko img {
+#info_top .info-top-inner {
   height: 100%;
-  width: auto;
-  mix-blend-mode: multiply;
 }
-/*------------*/
+@media screen and (max-width: 850px) {
+  #info_top .info-top-inner {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+#info_top .info-top-inner img {
+  margin-bottom: 16px;
+}
+@media screen and (max-width: 850px) {
+  #info_top .info-top-inner img {
+    margin-bottom: 8px;
+  }
+}
+
 /*---画面左　画像---*/
 #img_title {
   animation: infoAnimKeyframes 1s ease-in 0s both;
 }
 
-.info-top-inner {
-  width: 22vw;
+.img_idd {
+  animation: infoAnimKeyframes 1s ease-in 0.5s both;
+  margin-bottom: 32px;
+}
+.img_date {
+  animation: infoAnimKeyframes 1s ease-in 1s both;
 }
 @media screen and (max-width: 850px) {
-  .info-top-inner {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-.info-top-inner .img_idd {
-  margin-top: 1.2vw;
-  animation: infoAnimKeyframes 1s ease-in 0s both;
-}
-@media screen and (max-width: 850px) {
-  .info-top-inner .img_idd {
-    margin-top: 2vw;
-  }
-}
-.info-top-inner .img_date {
-  margin-top: 2.8vw;
-  animation: infoAnimKeyframes 1s ease-in 0s both;
-}
-@media screen and (max-width: 850px) {
-  .info-top-inner .img_date {
-    margin-top: 6.4vw;
+  .img_date {
     width: 70%;
     margin-left: auto;
   }
 }
-.info-top-inner #img_venue {
-  width: 15.7vw;
-  margin-top: 1vw;
-  animation: infoAnimKeyframes 1s ease-in 0s both;
+
+#img_venue {
+  width: 75%;
+  margin-bottom: 0 !important;
+  animation: infoAnimKeyframes 1s ease-in 1.5s both;
 }
 @media screen and (max-width: 850px) {
-  .info-top-inner #img_venue {
+  #img_venue {
     display: block;
     width: 70%;
     margin-left: auto;
   }
-}
-
-#img_FromTo {
-  margin-bottom: -20px;
-  animation: infoAnimKeyframes 1s ease-in 0.5s both;
-}
-@media screen and (max-width: 850px) {
-  #img_FromTo {
-    margin-top: auto;
-    width: 37.3vw;
-  }
-}
-
-#info_bottom_hanko {
-  animation: infoAnimKeyframes 1s ease-in 0.5s both;
 }
 
 @keyframes infoAnimKeyframes {
@@ -494,13 +464,58 @@ body {
   }
 }
 /*--------------*/
+#info_bottom {
+  height: 280px;
+  width: 100%;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: end;
+}
+@media screen and (max-width: 850px) {
+  #info_bottom {
+    width: 55%;
+    height: auto;
+    margin: 0;
+  }
+}
+
+#img_FromTo {
+  margin-bottom: -5%;
+  height: 77%;
+  width: auto;
+  animation: infoAnimKeyframes 1s ease-in 2.5s both;
+}
+@media screen and (max-width: 850px) {
+  #img_FromTo {
+    margin-top: auto;
+    height: 80%;
+  }
+}
+
+#info_bottom_hanko {
+  display: flex;
+  gap: 10px;
+  animation: infoAnimKeyframes 1s ease-in 2.5s both;
+  height: 28%;
+}
+@media screen and (max-width: 850px) {
+  #info_bottom_hanko {
+    height: 20%;
+  }
+}
+#info_bottom_hanko img {
+  height: 100%;
+  width: auto;
+  mix-blend-mode: multiply;
+}
+/*------------*/
 /*---SNSアイコン---*/
 #sns_icon {
   display: flex;
   position: absolute;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   top: 50%;
   left: 50%;
@@ -512,16 +527,13 @@ body {
   }
 }
 #sns_icon #twitter {
-  background-color: #000000;
-  width: 50px;
-  height: 50px;
-}
-#sns_icon #twitter img {
+  background-color: #ffffff;
   position: relative;
-  width: 52px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+}
+#sns_icon #twitter .Twitter_Outline {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 #sns_icon #instagram {
   background-color: #ffffff;
@@ -546,6 +558,13 @@ body {
 .sns_round {
   border-radius: 50%;
 }
+.sns_round.instagram img {
+  position: relative;
+  width: 29px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 /*--------------*/
 #title_frame {
@@ -560,7 +579,7 @@ body {
   position: absolute;
 }
 #title_frame .back {
-  z-index: 100;
+  z-index: 3;
   opacity: 1;
 }
 #title_frame .glyph {
@@ -684,4 +703,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
