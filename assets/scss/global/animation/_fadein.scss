@@ -1,5 +1,5 @@
-$delay: 0.3;
+$delay: 0.5;
 @mixin infoAnim($a) {
     $a: $a * $delay;
-    animation: infoAnimKeyframes 1s ease-in $a + 1s both;
+    animation: infoAnimKeyframes 1s ease-in $a + s both;
 }

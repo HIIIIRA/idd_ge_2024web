@@ -108,9 +108,8 @@ function animation() {
   var originText = new Array(Glyph.length).fill("");
   var Count = new Array(Glyph.length).fill(0);
   var fin = new Array(Glyph.length).fill(false);
-  var [appSp, disSp] = [3, 15];
+  var [appSp, disSp] = [1, 15];
   var animationState = "appear";
-  var r_length = $(Glyph[1]).html().length;
   var startDelay = 100;
   var stopTime = new Array(Glyph.length).fill(0);
   var shuffleTime = new Array(Glyph.length).fill(0);
@@ -122,12 +121,14 @@ function animation() {
   $(Glyph).each(function (i) {
     originText[i] = $(this).html();
    
-    var sp = Math.floor(appSp * originText[i].length / r_length + 1);
+    var sp  = appSp * appSpeed(Glyph[i].id.replace("img_", ""));
     spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
 
     $(this).html("");
     $(this).fadeIn(0);
   })
+
+ 
   
   function animationLoop(){
     switch(animationState){
@@ -154,11 +155,11 @@ function animation() {
         return true;
       }
 
-      if(Count[i] > 0){
+      if(Count[i] == 1){
         $(this).addClass("cursor");
       }
 
-      if(spritText.every((j) => j.length >= Count[i] + 50)){
+      if(spritText.every((j) => j.length > Count[i] + shuffleTimeLength)){
         var [eff1,eff2] = randomEffects(i);
       } 
       if(eff1){
@@ -166,8 +167,10 @@ function animation() {
       }
 
       if (spritText[i].length <= Count[i]) {
-        $(this).removeClass("cursor");
-        fin[i] = true;
+        if($(this).hasClass("cursor")){
+          $(this).removeClass("cursor");
+          fin[i] = true;
+        }
         return true;
       }
 
@@ -191,6 +194,7 @@ function animation() {
         spritText[i] = htmlText[i].match(RegExp(`.{1,${disSp}}`, "g"));
         spritText2[i] = htmlText[i].split("");
         Count[i] = 0;
+        shuffleTime[i] = 0;
       })
       intervalStartTime = new Date().getTime();
       animationState = "interval";
@@ -285,7 +289,7 @@ function animation() {
         $(this).addClass("fade");
       }
       
-      if(intervalStartTime + intervalLength - 1000 > t && intervalStartTime + 1000 < t){
+      if(intervalStartTime + intervalLength - 1000 > t && intervalStartTime + 2000 < t){
         var [eff1,eff2] = randomEffects(i);
         if(eff2){
           $("#back_" + this.id.replace("img_", "")).removeClass("fade").addClass("hide");
@@ -327,7 +331,7 @@ function animation() {
 
     if (fin.every((j) => j === false)) {
       $(Glyph).each(function (i) {
-        var sp = Math.floor(appSp * originText[i].length / r_length + 1);
+        var sp  = appSp * appSpeed(Glyph[i].id.replace("img_", ""));
         spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
         Count[i] = 0;
         htmlText[i] = "";
@@ -349,7 +353,7 @@ function animation() {
   }
 
   $(this)
-    .delay(4000)
+    .delay(2000)
     .queue(function () {
       animationLoop();
   });
@@ -429,4 +433,27 @@ const size = function (id) {
   }
 
   return [w, h];
+}
+
+const appSpeed = function(id){
+  var sp;
+  switch (id) {
+    case "F":
+      sp = 2;
+      break;
+    case "r":
+      sp = 3;
+      break;
+    case "o":
+      sp = 3;
+      break;
+    case "m":
+      sp = 5;
+      break;
+    case "T":
+      sp = 1;
+      break;
+  }
+
+  return sp;
 }

@@ -5,6 +5,7 @@
 
 body {
   background-color: setting.$background-white;
+  color: #333;
   margin: auto;
   height: 100%;
 }
@@ -80,6 +81,7 @@ body {
   height: 116px;
   top: 0;
   right: 0;
+  z-index: 1000;
 
   @include res.res(sp) {
     width: 82px;
@@ -147,12 +149,10 @@ body {
     margin-left: 0;
   }
 
-  #img_title {
-  }
   .img_idd {
     margin-top: 1.2vw;
 
-    @include anim.infoAnim(1);
+    @include anim.infoAnim(0);
 
     @include res.res(sp) {
       margin-top: 2vw;
@@ -161,7 +161,7 @@ body {
 
   .img_date {
     margin-top: 2.8vw;
-    @include anim.infoAnim(2);
+    @include anim.infoAnim(0);
 
     @include res.res(sp) {
       margin-top: 6.4vw;
@@ -174,7 +174,7 @@ body {
     width: 15.7vw;
     margin-top: 1vw;
 
-    @include anim.infoAnim(3);
+    @include anim.infoAnim(0);
 
     @include res.res(sp) {
       display: block;
@@ -187,7 +187,7 @@ body {
 #img_FromTo {
   margin-bottom: -20px;
 
-  @include anim.infoAnim(5);
+  @include anim.infoAnim(1);
 
   @include res.res(sp) {
     margin-top: auto;
@@ -196,7 +196,7 @@ body {
 }
 
 #info_bottom_hanko {
-  @include anim.infoAnim(5);
+  @include anim.infoAnim(1);
 }
 
 @keyframes infoAnimKeyframes {

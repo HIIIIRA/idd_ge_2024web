@@ -11,7 +11,7 @@
   font-size: 10px;
   line-height: 10px;
 
-  @include anim.infoAnim(-1);
+  //@include anim.infoAnim(0);
 
   // @include res.res(sp) {
   //   width: 104%;
@@ -139,7 +139,7 @@
   .cursor::after {
     content: "|";
     animation-name: blink;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-iteration-count: infinite;
   }
 
@@ -161,4 +161,3 @@
   top: 0;
   left: 0;
 }
-
