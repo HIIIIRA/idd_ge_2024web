@@ -476,7 +476,7 @@ body {
 @media screen and (max-width: 850px) {
   #info_bottom {
     width: 55%;
-    height: auto;
+    height: 50vw;
     margin: 0;
   }
 }
@@ -490,7 +490,8 @@ body {
 @media screen and (max-width: 850px) {
   #img_FromTo {
     margin-top: auto;
-    height: 80%;
+    height: auto;
+    width: 80%;
   }
 }
 
