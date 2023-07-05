@@ -11,14 +11,6 @@
   font-size: 10px;
   line-height: 10px;
 
-  //@include anim.infoAnim(0);
-
-  // @include res.res(sp) {
-  //   width: 104%;
-  //   height: 104%;
-  //   margin: -2%;
-  // };
-
   img {
     position: absolute;
   }
@@ -34,7 +26,8 @@
   }
 
   .fade {
-    transition: all 1s;
+    transition-property: opacity, visibility;
+    transition-duration: 1s;
   }
 
   .hide {

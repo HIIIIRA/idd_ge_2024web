@@ -100,10 +100,11 @@ const createPixelData = function (images, code) {
 };
 
 function animation() {
-  var fps = 0;
+  var fps = 60;
   var frameCount = 0;
-  var startTime, endTime;
+  var startTime, previousTime, currentTime;
   startTime = new Date().getTime();
+  previousTime = startTime;
 
   var spritText = [];
   var spritText2 = [];
@@ -111,27 +112,26 @@ function animation() {
   var originText = new Array(Glyph.length).fill("");
   var Count = new Array(Glyph.length).fill(0);
   var fin = new Array(Glyph.length).fill(false);
-  var [appSp, disSp] = [1, 15];
+  var disSp = 15;
   var animationState = "appear";
-  var startDelay = 100;
+  var startDelay = 50;
   var stopTime = new Array(Glyph.length).fill(0);
   var shuffleTime = new Array(Glyph.length).fill(0);
   var [stopTimeLength, shuffleTimeLength] = [1000, 200];
   var intervalStartTime = 0;
   var intervalLength = 10000;
   var effInterval = new Array(Glyph.length).fill(false);
+  var fpsRate;
 
   $(Glyph).each(function (i) {
     originText[i] = $(this).html();
-
-    var sp = appSp * appSpeed(Glyph[i].id.replace("img_", ""));
-    spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
-
     $(this).html("");
     $(this).fadeIn(0);
   });
+  
 
   function animationLoop() {
+    fpsCounter();
     switch (animationState) {
       case "appear":
         appear();
@@ -142,9 +142,6 @@ function animation() {
       case "interval":
         interval();
         break;
-    }
-    if (showFps) {
-      fpsCounter();
     }
     requestAnimationFrame(animationLoop);
   }
@@ -161,10 +158,8 @@ function animation() {
         $(this).addClass("cursor");
       }
 
-      if (spritText.every((j) => j.length > Count[i] + shuffleTimeLength)) {
-        var [eff1, eff2] = randomEffects(i);
-      }
-      if (eff1) {
+      var stopEff= stopEffect(i);
+      if (stopEff) {
         return true;
       }
 
@@ -178,10 +173,7 @@ function animation() {
 
       var addText = spritText[i][Count[i]];
       htmlText[i] += addText;
-
-      if (!eff2) {
-        setHTMLText(i);
-      }
+      setHTMLText(i);
 
       Count[i]++;
     });
@@ -199,11 +191,21 @@ function animation() {
         Count[i] = 0;
         shuffleTime[i] = 0;
       });
-      intervalStartTime = new Date().getTime();
+      intervalStartTime = currentTime;
       animationState = "interval";
     }
   }
 
+  const setAppearSpeed = function(){
+    fpsRate = Math.round(fps / 60);
+    if(fpsRate === 0){
+      fpsRate = 1;
+    }
+    $(Glyph).each(function (i) {
+      var sp = Math.round(appSpeed(Glyph[i].id.replace("img_", "")) / fpsRate);
+      spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
+    });
+  }
   const setHTMLText = function (i) {
     var modifiedText = removeSpace(htmlText[i]);
     $(Glyph[i]).html(
@@ -225,29 +227,34 @@ function animation() {
     return str;
   };
 
-  const randomEffects = function (i) {
+  const stopEffect = function (i) {
     var random = Math.random();
-    var t = new Date().getTime();
     var playStop = stopTime[i] != 0;
-    var playShuffle = shuffleTime[i] != 0;
 
-    if (random < 0.01 && !playStop && !playShuffle) {
+    if (random < 0.01 && !playStop) {
       if (i === 0) {
-        stopTime[i] = new Date().getTime();
+        stopTime[i] = currentTime;
       } else if (fin[i - 1] === false) {
-        stopTime[i] = new Date().getTime();
+        stopTime[i] = currentTime;
       }
     }
 
-    if (stopTime[i] + stopTimeLength < t) {
+    if (stopTime[i] + stopTimeLength < currentTime) {
       stopTime[i] = 0;
     }
 
-    if (random > 0.998 && !playShuffle && !playStop) {
-      shuffleTime[i] = new Date().getTime();
+    return playStop;
+  };
+
+  const shuffleEffect = function (i) {
+    var random = Math.random();
+    var playShuffle = shuffleTime[i] != 0;
+
+    if (random > 0.998 && !playShuffle) {
+      shuffleTime[i] = currentTime;
     }
 
-    if (shuffleTime[i] + shuffleTimeLength > t) {
+    if (shuffleTime[i] + shuffleTimeLength > currentTime) {
       var temporary = htmlText[i];
       htmlText[i] = replaceRandomChar(htmlText[i]);
       setHTMLText(i);
@@ -259,12 +266,12 @@ function animation() {
       }
     }
 
-    return [playStop, playShuffle];
+    return playShuffle;
   };
 
   const replaceRandomChar = function (text) {
     var characters = text.split("");
-    var character = "█▓▒░&$#@---";
+    var character = "█▓▒░&$#abc---";
 
     var replacedChar = characters.map(function (char) {
       if (char === "凸" || char === "凹") {
@@ -279,21 +286,20 @@ function animation() {
   };
 
   function interval() {
-    var t = new Date().getTime();
     $(Glyph).each(function (i) {
-      if (intervalStartTime + intervalLength + 1100 <= t) {
+      if (intervalStartTime + intervalLength + 1100 <= currentTime) {
         if (animationState === "interval") {
           animationState = "disappear";
         }
       } else if (
-        intervalStartTime + intervalLength + 100 <= t &&
+        intervalStartTime + intervalLength + 100 <= currentTime &&
         $(this).hasClass("hide")
       ) {
         setHTMLText(i);
         $("#back_" + this.id.replace("img_", "")).addClass("hide");
         $(this).removeClass("hide");
       } else if (
-        intervalStartTime + intervalLength <= t &&
+        intervalStartTime + intervalLength <= currentTime &&
         !$(this).hasClass("fade")
       ) {
         $("#back_" + this.id.replace("img_", "")).addClass("fade");
@@ -301,11 +307,11 @@ function animation() {
       }
 
       if (
-        intervalStartTime + intervalLength - 1000 > t &&
-        intervalStartTime + 2000 < t
+        intervalStartTime + intervalLength - 1000 > currentTime &&
+        intervalStartTime + 2000 < currentTime
       ) {
-        var [eff1, eff2] = randomEffects(i);
-        if (eff2) {
+        var shuffleEff = shuffleEffect(i);
+        if (shuffleEff) {
           $("#back_" + this.id.replace("img_", ""))
             .removeClass("fade")
             .addClass("hide");
@@ -357,8 +363,7 @@ function animation() {
 
     if (fin.every((j) => j === false)) {
       $(Glyph).each(function (i) {
-        var sp = appSp * appSpeed(Glyph[i].id.replace("img_", ""));
-        spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
+        setAppearSpeed();
         Count[i] = 0;
         htmlText[i] = "";
       });
@@ -368,21 +373,29 @@ function animation() {
 
   function fpsCounter() {
     frameCount++;
-    endTime = new Date().getTime();
-    if (endTime - startTime >= 1000) {
+    currentTime = new Date().getTime();
+    if (currentTime - previousTime >= 1000) {
       fps = frameCount;
       frameCount = 0;
-      startTime = new Date().getTime();
-      let animationFPS = document.getElementById("fps");
-      animationFPS.innerHTML = "fps : " + fps;
+      previousTime = currentTime;
+      if (showFps) {
+        let animationFPS = document.getElementById("fps");
+        animationFPS.innerHTML = "fps : " + fps;
+      }
     }
   }
 
-  $(this)
-    .delay(2000)
-    .queue(function () {
+  function standbyState(){
+    if(startTime + 4000 <= currentTime){
+      setAppearSpeed();
       animationLoop();
-    });
+    }else{
+      fpsCounter();
+      requestAnimationFrame(standbyState);
+    }
+  }
+  standbyState();
+  
 }
 
 $(window).resize(function () {
@@ -465,19 +478,19 @@ const appSpeed = function (id) {
   var sp;
   switch (id) {
     case "F":
-      sp = 2;
+      sp = 4;
       break;
     case "r":
-      sp = 3;
+      sp = 6;
       break;
     case "o":
-      sp = 3;
+      sp = 6;
       break;
     case "m":
-      sp = 5;
+      sp = 10;
       break;
     case "T":
-      sp = 1;
+      sp = 2;
       break;
   }
 

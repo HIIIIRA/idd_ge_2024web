@@ -71,8 +71,6 @@ time,
 mark,
 audio,
 video {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   letter-spacing: 0;
   vertical-align: baseline;
@@ -516,7 +514,9 @@ body {
 #sns_icon {
   display: flex;
   position: absolute;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   top: 50%;
   left: 50%;
@@ -581,7 +581,8 @@ body {
   white-space: nowrap;
 }
 #title_frame .fade {
-  transition: all 1s;
+  transition-property: opacity, visibility;
+  transition-duration: 1s;
 }
 #title_frame .hide {
   visibility: hidden;
@@ -697,6 +698,4 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
