@@ -331,14 +331,15 @@ body {
 
 /*---コンテナ---*/
 #container_info {
-  width: 400px;
+  width: 47vh;
   height: 100%;
   position: absolute;
   left: 0;
   top: 0;
-  padding-top: 24px;
-  padding-left: 24px;
-  padding-bottom: 24px;
+  padding-top: 4vh;
+  padding-left: 4vh;
+  padding-bottom: 4vh;
+  padding-right: 4vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -394,7 +395,7 @@ body {
 /*--------------*/
 /*---画面左---*/
 #info_top {
-  width: 350px;
+  width: 100%;
 }
 @media screen and (max-width: 850px) {
   #info_top {
@@ -465,8 +466,8 @@ body {
 }
 /*--------------*/
 #info_bottom {
-  height: 280px;
-  width: 100%;
+  height: auto;
+  width: 83%;
   margin-top: 32px;
   display: flex;
   flex-direction: column;
