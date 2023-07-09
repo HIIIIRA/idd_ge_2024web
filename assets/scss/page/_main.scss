@@ -142,7 +142,7 @@ body {
 }
 .img_idd {
   @include anim.infoAnim(1);
-  margin-bottom: 32px;
+  margin-bottom: 32px !important;
   @include res.res(sp) {
   }
 }
@@ -191,7 +191,7 @@ body {
   justify-content: end;
   @include res.res(sp) {
     width: 55%;
-    height: 50vw;
+    height: auto;
     margin: 0;
   }
 }
@@ -203,26 +203,21 @@ body {
 
   @include res.res(sp) {
     margin-top: auto;
-    height: auto;
+    height: 40vw;
     width: 80%;
   }
 }
 #info_bottom_hanko {
-  display: flex;
-  gap: 10px;
   @include anim.infoAnim(5);
-  height: 28%;
+  width: 60%;
 
   @include res.res(sp) {
-    height: 20%;
+    height: auto;
+    width: 70%;
   }
   img {
-    height: 100%;
-    width: auto;
+    width: 100%;
     mix-blend-mode: multiply;
-  }
-
-  #img_hanko2 {
   }
 }
 

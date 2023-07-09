@@ -71,6 +71,8 @@ time,
 mark,
 audio,
 video {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   letter-spacing: 0;
   vertical-align: baseline;
@@ -426,7 +428,7 @@ body {
 
 .img_idd {
   animation: infoAnimKeyframes 1s ease-in 0.5s both;
-  margin-bottom: 32px;
+  margin-bottom: 32px !important;
 }
 .img_date {
   animation: infoAnimKeyframes 1s ease-in 1s both;
@@ -474,7 +476,7 @@ body {
 @media screen and (max-width: 850px) {
   #info_bottom {
     width: 55%;
-    height: 50vw;
+    height: auto;
     margin: 0;
   }
 }
@@ -488,35 +490,32 @@ body {
 @media screen and (max-width: 850px) {
   #img_FromTo {
     margin-top: auto;
-    height: auto;
+    height: 40vw;
     width: 80%;
   }
 }
 
 #info_bottom_hanko {
-  display: flex;
-  gap: 10px;
   animation: infoAnimKeyframes 1s ease-in 2.5s both;
-  height: 28%;
+  width: 60%;
 }
 @media screen and (max-width: 850px) {
   #info_bottom_hanko {
-    height: 20%;
+    height: auto;
+    width: 70%;
   }
 }
 #info_bottom_hanko img {
-  height: 100%;
-  width: auto;
+  width: 100%;
   mix-blend-mode: multiply;
 }
+
 /*------------*/
 /*---SNSアイコン---*/
 #sns_icon {
   display: flex;
   position: absolute;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   top: 50%;
   left: 50%;
@@ -698,4 +697,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
