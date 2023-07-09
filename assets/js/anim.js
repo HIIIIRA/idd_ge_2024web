@@ -1,7 +1,7 @@
 var Glyph;
 var aspect = [];
 var pixelSize = 100;
-let showFps = true;
+let showFps = false;
 
 $(document).ready(function () {
   Glyph = document.getElementsByClassName("glyph");
@@ -128,7 +128,6 @@ function animation() {
     $(this).html("");
     $(this).fadeIn(0);
   });
-  
 
   function animationLoop() {
     fpsCounter();
@@ -158,7 +157,7 @@ function animation() {
         $(this).addClass("cursor");
       }
 
-      var stopEff= stopEffect(i);
+      var stopEff = stopEffect(i);
       if (stopEff) {
         return true;
       }
@@ -196,16 +195,16 @@ function animation() {
     }
   }
 
-  const setAppearSpeed = function(){
+  const setAppearSpeed = function () {
     fpsRate = Math.round(fps / 60);
-    if(fpsRate === 0){
+    if (fpsRate === 0) {
       fpsRate = 1;
     }
     $(Glyph).each(function (i) {
       var sp = Math.round(appSpeed(Glyph[i].id.replace("img_", "")) / fpsRate);
       spritText[i] = originText[i].match(RegExp(`.{1,${sp}}`, "g"));
     });
-  }
+  };
   const setHTMLText = function (i) {
     var modifiedText = removeSpace(htmlText[i]);
     $(Glyph[i]).html(
@@ -385,17 +384,16 @@ function animation() {
     }
   }
 
-  function standbyState(){
-    if(startTime + 4000 <= currentTime){
+  function standbyState() {
+    if (startTime + 4000 <= currentTime) {
       setAppearSpeed();
       animationLoop();
-    }else{
+    } else {
       fpsCounter();
       requestAnimationFrame(standbyState);
     }
   }
   standbyState();
-  
 }
 
 $(window).resize(function () {

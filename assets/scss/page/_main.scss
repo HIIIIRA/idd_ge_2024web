@@ -201,8 +201,8 @@ body {
 }
 #img_FromTo {
   margin-bottom: -5%;
-  height: 77%;
-  width: auto;
+  height: auto;
+  width: 85%;
   @include anim.infoAnim(5);
 
   @include res.res(sp) {
@@ -213,7 +213,7 @@ body {
 }
 #info_bottom_hanko {
   @include anim.infoAnim(5);
-  width: 60%;
+  width: 90%;
 
   @include res.res(sp) {
     height: auto;

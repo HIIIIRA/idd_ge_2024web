@@ -490,8 +490,8 @@ body {
 
 #img_FromTo {
   margin-bottom: -5%;
-  height: 77%;
-  width: auto;
+  height: auto;
+  width: 85%;
   animation: infoAnimKeyframes 1s ease-in 2.5s both;
 }
 @media screen and (max-width: 850px) {
@@ -504,7 +504,7 @@ body {
 
 #info_bottom_hanko {
   animation: infoAnimKeyframes 1s ease-in 2.5s both;
-  width: 60%;
+  width: 90%;
 }
 @media screen and (max-width: 850px) {
   #info_bottom_hanko {
