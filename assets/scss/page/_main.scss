@@ -145,7 +145,8 @@ body {
 .img_idd {
   @include anim.infoAnim(1);
   margin-bottom: 32px !important;
-  @include res.res(sp) {
+  @media screen and (max-width: 520px) {
+    margin-bottom: 24px !important;
   }
 }
 

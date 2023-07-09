@@ -431,6 +431,12 @@ body {
   animation: infoAnimKeyframes 1s ease-in 0.5s both;
   margin-bottom: 32px !important;
 }
+@media screen and (max-width: 520px) {
+  .img_idd {
+    margin-bottom: 24px !important;
+  }
+}
+
 .img_date {
   animation: infoAnimKeyframes 1s ease-in 1s both;
 }
