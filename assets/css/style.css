@@ -578,6 +578,7 @@ body {
 #title_frame .glyph {
   opacity: 1;
   white-space: nowrap;
+  user-select: none;
 }
 #title_frame .fade {
   transition-property: opacity, visibility;
